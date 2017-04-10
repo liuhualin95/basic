@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js数组知识整理</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<script type="text/javascript">
+		//数组去重
+		var uniqueArrTest = [5,2,4,9,4,2,1,8,9]; 
+		function unique(arr){
+			var result=[];
+			for(var i=0;i<arr.length;i++){
+				if(result.indexOf(arr[i])==-1){
+					result.push(arr[i]);
+				}
+			}
+			return result;
+		}
+		console.log(unique(uniqueArrTest));//[5, 2, 4, 9, 1, 8]
+
+		//数组交集
+		var insecTestArr1 = [1,2,3,4];
+		var insecTestArr2 = [3,4,5,6];
+		Array.prototype.intersection=function(arr){
+			return this.filter(function(val){
+				return arr.indexOf(val)!=-1;
+			})
+		}
+		console.log(insecTestArr1.intersection(insecTestArr2));//[3, 4]
+
+		//数组差集
+		var diffTestArr1 = [1,2,3,4];
+		var diffTestArr2 = [3,4,5,6];
+		Array.prototype.diff=function(arr){
+			return this.filter(function(val){
+				return arr.indexOf(val)==-1;
+			})
+		}
+		console.log(diffTestArr1.diff(diffTestArr2));//[1, 2]
+
+		//数组并集
+		var unionArr1 = [1,2,3,4];
+		var unionArr2 = [3,4,5,6];
+		var unionArr = unionArr1.concat(unionArr2);//先合并再去重
+		console.log(unique(unionArr));//[1, 2, 3, 4, 5, 6]
+
+		//判断是否为数组
+		var judgeTestArr = [1,2,3,4];
+		console.log(Array.isArray(judgeTestArr));//true
+
+		function judgeArr(arr){
+			return Object.prototype.toString.call(arr)==='[object Array]';
+		}
+		console.log(judgeArr(judgeTestArr));//true
+
+		//concat()方法用于合并数组
+		var arr1 = [1,2,3];
+		var arr2 = [4,5,6];
+		var arr = arr1.concat(arr2);
+		console.log(arr);//[1, 2, 3, 4, 5, 6]
+
+		// every(), some(), forEach(), map(), fliter()括号内均为
+		// function(element, index, array){}
+	</script>
+</body>
+</html>
