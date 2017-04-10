@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<!-- jsonp的实现原理：通过动态script元素来使用，使用时为src属性指定一个跨域url
+优点：直接访问响应文本，支持在浏览器和服务器之间进行双向通信
+缺点：其他域不安全时可能在响应中夹带一些恶意代码，只能完全放弃；
+      确认请求失败并不容易 -->
+<script type="text/javascript">
+	function test(data){
+		console.log(123);
+		console.log(data);
+		alert(data.flightID);
+	}
+</script>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>jsonp的跨域demo</title>
+</head>
+
+
+<body>
+jsonp的跨域demo
+</body>
+<script type="text/javascript">
+	var script = document.createElement("script");
+	script.src="http://192.168.1.33/HealthSystemCode/index.php/Home/Test/Test/getAllDiseasesCount?callback=test";
+	document.body.insertBefore(script, document.body.firstChild);
+</script>
+</html>
+<!-- 服务器端方法 -->
+<!-- public function getAllDiseasesCount(){
+        $cb = $_GET['callback'];
+        $test=array("flightID"=>"123");
+        echo $cb.'('.json_encode($test).')';
+    } -->
