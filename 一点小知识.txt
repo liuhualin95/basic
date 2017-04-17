@@ -11,14 +11,21 @@
 	cookie组成有key-value对，域名和路径等；
 	服务器接收不到可能是跨域或者域名和路径有错等原因
 3、了解哪些web安全问题
-	xss跨站脚本攻击：利用嵌入脚本窃取cookie值发送恶意请求
+	1）xss跨站脚本攻击：利用嵌入脚本窃取cookie值发送恶意请求
 	防御方法：对输入数据进行再编码，将其转移过滤后输出
 	将会话cookie设置为HttpOnly，无法用脚本访问cookie
-	SQL注入攻击：通过非法SQL窃取数据库数据的行为
+	2）SQL注入攻击：通过非法SQL窃取数据库数据的行为
 	防御方法：不要动态拼接SQL字符串，尽量过滤用户输入数据
-	csrf 如何产生 如何防御
-	dns劫持如何防御
-	cors跨域的时候如何保证安全
+	3）csrf跨站请求伪造：通过伪装来自受信任用户的请求达到目的
+	http头中有一个Referer字段，记录了该http请求的来源地址，对其进行验证；
+	在请求地址中添加token并验证；在http头中自定义属性并验证
+	4）dns劫持如何防御：手动修改DNS；修改路由器密码
+	5）CORS跨域的时候传递cookie：设置XHR的withCredentials属性为true，
+	服务器端设置Allow-Control-Allow-Credentials为true，使得跨域可以带cookie，
+	同时设置Allow-Control-Allow-Origin，此时不能为通配符，必须指定明确的
+	与请求网页一致的域名
+	6）CORS跨域的时候如何保证安全：用cookie token，但是由于cookie容易被窃取，
+	设置cookie为http-only更安全
 4、web存储有哪些
 	cookie、localStorage、sessionStorage、离线存储
 	1）cookie是网站为了标识用户身份而存储在用户本地的数据，
@@ -27,7 +34,7 @@
 	2）cookie大小限制为4k，localStorage和sessionStorage大小为5M或更大
 	3）cookie在设置的过期时间之前数据不会消失，localStorage数据在本地
 	长久保存，除非手动删除，sessionStorage数据在浏览器窗口关闭后丢失
-	4）离线存储：页面头部加入一个manifest属性，为manifest文件指定
+	4）离线存储：页面头部加入一个manifest属性，为cache.manifest文件指定
 	离线缓存的资源，离线状态时操作window.applicationCache进行需求实现
 	
 	
