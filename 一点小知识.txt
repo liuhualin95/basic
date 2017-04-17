@@ -1,0 +1,33 @@
+1、绝对定位和相对定位的区别
+	position：absolute生成绝对定位的元素
+	脱离文档流，相对于值不为static的第一个父元素去定位
+	position：relative生成相对定位的元素
+	没有脱离文档流，相对自身偏移
+	补充：其他定位方式fixed、inherit、static
+	fixed：生成绝对定位的元素，相对于浏览器窗口进行定位
+	inherit：继承父元素的position属性
+	static：默认值，没有定位，元素出现在正常文档流
+2、浏览器发送cookie服务器接收不到什么原因
+	cookie组成有key-value对，域名和路径等；
+	服务器接收不到可能是跨域或者域名和路径有错等原因
+3、了解哪些web安全问题
+	xss跨站脚本攻击：利用嵌入脚本窃取cookie值发送恶意请求
+	防御方法：对输入数据进行再编码，将其转移过滤后输出
+	将会话cookie设置为HttpOnly，无法用脚本访问cookie
+	SQL注入攻击：通过非法SQL窃取数据库数据的行为
+	防御方法：不要动态拼接SQL字符串，尽量过滤用户输入数据
+	csrf 如何产生 如何防御
+	dns劫持如何防御
+	cors跨域的时候如何保证安全
+4、web存储有哪些
+	cookie、localStorage、sessionStorage、离线存储
+	1）cookie是网站为了标识用户身份而存储在用户本地的数据，
+	cookie始终在同源的http请求中携带，在服务器和浏览器间双向传递，
+	localStorage和sessionStorage不会自动把数据传给服务器，仅在本地保存
+	2）cookie大小限制为4k，localStorage和sessionStorage大小为5M或更大
+	3）cookie在设置的过期时间之前数据不会消失，localStorage数据在本地
+	长久保存，除非手动删除，sessionStorage数据在浏览器窗口关闭后丢失
+	4）离线存储：页面头部加入一个manifest属性，为manifest文件指定
+	离线缓存的资源，离线状态时操作window.applicationCache进行需求实现
+	
+	
