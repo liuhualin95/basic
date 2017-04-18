@@ -12,6 +12,8 @@
 		this.value=null;
 		this.left=null;
 		this.right=null;
+		this.maxleft=null;//左子树的最长距离
+		this.maxright=null;//右子树的最长距离
 	}
 	function BST(){
 		this.root=null;
@@ -134,5 +136,29 @@
 	var result=[];
 	bst.print(result);
 	console.log(result);
+
+	var max=0;
+	function getMaxlength(node){//找出二叉树节点间的最大距离
+		if(node==null)
+			return;
+		if(node.left==null)
+			node.maxleft=0;
+		if(node.right==null)
+			node.maxright=0;
+		if(node.left!=null){
+			getMaxlength(node.left);
+			var tmp= node.left.maxleft>node.left.maxright? node.left.maxleft:node.left.maxright;
+			node.maxleft=tmp+1;
+		}
+		if(node.right!=null){
+			getMaxlength(node.right);
+			var tmp= node.right.maxleft>node.right.maxright? node.right.maxleft:node.right.maxright;
+			node.maxright=tmp+1;
+		}
+		if(node.maxleft+node.maxright>max)
+			max=node.maxleft+node.maxright;
+	}
+	getMaxlength(bst.root);
+	console.log(max);
 </script>
 </html>
