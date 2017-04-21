@@ -41,7 +41,7 @@
 		}
 		return res;
 	}
-	console.log(getSum2("0", "1231232131231"));//1231232131243
+	console.log(getSum2("0", "1231232131231"));//1231232131231
 
 	function getMulti(a, b){//大整数相乘
 		b=b.split('').reverse();
@@ -57,7 +57,7 @@
 			return getSum2(previousValue,nextSiblingsValue);
 		})
 	}
-	console.log(getMulti("1234567891212","1234567891212"));
+	console.log(getMulti("1234567891212","1234567891212"));//1524157878011644666828944
 
 	function add(m, n){//二进制相加
 		while(m){
@@ -68,6 +68,6 @@
 		}
 		return n;
 	}
-	console.log(add(45,55));
+	console.log(add(45,55));//100
 </script>
 </html>
