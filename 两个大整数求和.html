@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>两个大整数</title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	function getSum1(a, b){//大整数相加  笨方法
+		if(a.length<b.length) b=[a, a=b][0];
+		b=new Array(a.length-b.length+1).join("0").concat(b);
+		var count=0,tmp,res=[],
+		a=a.split(''),
+		b=b.split('');
+		var n=a.length;
+		for(var i=0;i<n;i++){
+			tmp = (+a.pop()) + (+b.pop()) + count;
+			if(tmp>=10){
+				tmp-=10;
+				count=1;
+			}else
+				count=0;
+			res.push(tmp);
+		}
+		res.push(count);
+		console.log(res);
+		return res.reverse().join("").replace(/^0+/,"");
+	}
+	console.log(getSum1("12", "1231232131231"));//1231232131243
+
+	function getSum2(a, b){//大整数相加
+		a=a.split('');
+		b=b.split('');
+		var c=0,res="";
+		while(a.length||b.length||c){
+			c += ~~a.pop() + ~~b.pop();//~~按位取反两次
+			res = c%10 + res;
+			c = c>9;
+		}
+		return res;
+	}
+	console.log(getSum2("0", "1231232131231"));//1231232131243
+
+	function getMulti(a, b){//大整数相乘
+		b=b.split('').reverse();
+		var res=[];
+		for(var i=0;i<b.length;i++){
+			var c="0";
+			for(var j=0;j<+b[i];j++)
+				c=getSum2(c, a);
+			var d = new Array(i+1).join("0");
+			res.push(c.concat(d));
+		}
+		return res.reduce(function(previousValue,nextSiblingsValue){
+			return getSum2(previousValue,nextSiblingsValue);
+		})
+	}
+	console.log(getMulti("1234567891212","1234567891212"));
+
+	function add(m, n){//二进制相加
+		while(m){
+			m1=(m&n)<<1;
+			n1=m^n;
+			m=m1;
+			n=n1;
+		}
+		return n;
+	}
+	console.log(add(45,55));
+</script>
+</html>
