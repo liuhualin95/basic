@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>css布局+列表添加删除查询</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    </head>
+      <style type="text/css">
+        .test{
+          border-left: 1px solid black;
+          padding: 10px;
+        }
+        .header{
+          width: auto;
+          height: 100px;
+          border: 1px solid green;
+          position: relative;
+        }
+        .header .header-left{
+          width: 80px;
+          height: 80px;
+          margin: 9px;
+          border: 1px solid red;
+        }
+        .header .header-right{
+          position: absolute;
+          bottom: 10px;
+          right: 15px;
+          border: 1px solid green;
+          width: 100px;
+          text-align: right;
+        }
+        .content{
+          margin-top: 10px;
+        }
+        .content:after{
+          clear: both;
+          content: '';
+          display: block;
+          width: 0;
+          height: 0;
+          visibility: hidden;
+        }
+        .content .content-right{
+          float: right;
+          width: 200px;
+          border: 1px solid red;
+        }
+        .content .content-left{
+          height: 300px;
+          margin-right: 220px;
+          border: 1px solid purple;
+        }
+        .footer{
+          margin-top: 10px;
+          text-align: center;
+          border: 1px solid black;
+        }
+        .test11{
+          height: 1px;
+          overflow: hidden;
+          background: red;
+        }
+      </style>
+    <body>
+      <div class="test">
+        <div class="header">
+          <div class="header-left">Logo</div>
+          <div class="header-right">
+            <span>用户名</span>
+          </div>
+        </div>
+        <div class="content">
+          <div class="content-right">aside-宽度定宽200px</div>
+          <div class="content-left">content-自适应宽度</div> 
+        </div>
+        <div class="footer">
+          <span>footer</span>
+        </div>
+      </div>
+      <div class="test11"></div>
+      <div style="margin-top: 10px;">
+        <input type="text" name="text" id="input">
+        <input type="button" value="add" id="add">
+        <ul id="ul">
+          <li>123<span class="close">X</span></li>
+          <li>456<span class="close">X</span></li>
+          <li>789<span class="close">X</span></li>
+        </ul>
+      </div>
+    </body>
+    <style type="text/css">
+      #input{
+        width: 200px;
+      }
+      ul{
+        list-style: none;
+        width: 204px;
+        margin: 5px 0;
+        padding: 0;
+      }
+      ul li{
+        height: 20px;
+        padding: 1px;
+        margin: 0;
+        position: relative;
+      }
+      ul li span{
+        position: absolute;
+        right: 5px;
+        cursor: pointer;
+      }
+    </style>
+<script type="text/javascript">
+  var addbtn = document.getElementById("add");
+  var ul = document.getElementById("ul");
+  var lis = ul.getElementsByTagName("li");
+  var spans = ul.getElementsByTagName("span");
+  var input = document.getElementById("input");
+  init();
+  function init(){
+    for(var i=0;i<spans.length;i++){
+      spans[i].onclick=function(j){
+        return function(){
+          ul.removeChild(lis[j]);
+          init();
+        }
+      }(i);
+    }
+    input.onkeyup=function(){
+      var reg = new RegExp('^'+input.value);
+      for(var k=0;k<lis.length;k++){
+        lis[k].style.display="block";
+        if(reg.exec(lis[k].firstChild.nodeValue)==null){
+          lis[k].style.display="none";
+        }
+      }
+      init();
+    }
+  }
+  addbtn.onclick=function(){
+    if(input.value!=""){
+      var newli = document.createElement("li");
+      var newtext = document.createTextNode(input.value);
+      var newspan = document.createElement("span");
+      newspan.setAttribute("class","close");
+      newspan.appendChild(document.createTextNode("X"));
+      newli.appendChild(newtext);
+      newli.appendChild(newspan);
+      ul.appendChild(newli);
+      init();
+    }
+  }
+</script> 
+</html>
+
