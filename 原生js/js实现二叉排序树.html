@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js实现二叉排序树</title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	function Node(){
+		this.value=null;
+		this.left=null;
+		this.right=null;
+		this.maxleft=null;//左子树的最长距离
+		this.maxright=null;//右子树的最长距离
+	}
+	function BST(){
+		this.root=null;
+	}
+	BST.prototype.insert=function(data){
+		if(!data)
+			return;
+		var node = new Node();
+		node.value = data;
+		if(this.root==null)
+			this.root = node;
+		else{
+			var curNode=this.root;
+			while(true){
+				if(curNode.value>=data){
+					if(curNode.left==null){
+						curNode.left=node;
+						break;
+					}else
+						curNode=curNode.left;
+				}else{
+					if(curNode.right==null){
+						curNode.right=node;
+						break;
+					}else
+						curNode=curNode.right;
+				}
+			}
+		}
+	}
+	BST.prototype.remove=function(data){
+		var node=this.root,
+			parent=null;
+		while(node!=null&&node.value!=data){
+			if(node.value>data){
+				parent=node;
+				node=node.left;
+			}else{
+				parent=node;
+				node=node.right;
+			}
+		}
+		if(node==null)
+			return false;
+		if(node.left==null||node.right==null){//当前移除节点的左右两个子树至少一个为空
+			if(parent==null){
+				this.root= node.left==null? node.right:node.left;
+			}else if(parent.left==node){
+				parent.left= node.left==null? node.right:node.left;
+			}else if(parent.right==node){
+				parent.right= node.left==null? node.right:node.left;
+			}
+		}else{
+			var tmp=parent=node;//记录当前节点，为了后面替换直接后继的值
+			node=node.right;
+			while(node.left!=null){//寻找直接后继
+				parent=node;
+				node=node.left;
+			}
+			tmp.value=node.value;//被删除节点的值替换为直接后继的值
+			if(parent.left==node)
+				parent.left=node.right;
+			else if(parent.right==node)
+				parent.right=node.right;
+		}
+	}
+	BST.prototype.find=function(data){
+		var node=this.root;
+		while(node!=null){
+			if(node.value==data)
+				return node;
+			else if(node.value>data)
+				node=node.left;
+			else
+				node=node.right;
+		}
+	}
+	BST.prototype.getMax=function(){
+		var node=this.root;
+		while(node.right!=null){
+			node=node.right;
+		}
+		return node.value;
+	}
+	BST.prototype.getMin=function(){
+		var node=this.root;
+		while(node.left!=null){
+			node=node.left;
+		}
+		return node.value;
+	}
+	BST.prototype.print=function(arr){
+		var node=this.root;
+		var stack=[];
+		while(node||stack.length){
+			if(node){
+				stack.push(node);
+				node=node.left;
+			}else{
+				node=stack.pop();
+				arr.push(node.value);
+				node=node.right;
+			}
+		}
+	}
+	var arr=[34,6,23,5,12,7,26,24,25];
+	var bst = new BST();
+	for(var i=0,l=arr.length;i<l;i++){
+		bst.insert(arr[i]);
+	}
+	console.log(bst);
+	var res=[];
+	bst.print(res);
+	console.log(res);
+	console.log(bst.find(23));
+	console.log(bst.getMax());
+	console.log(bst.getMin());
+	bst.remove(23);
+	console.log(bst);
+	var result=[];
+	bst.print(result);
+	console.log(result);
+
+	var max=0;
+	function getMaxlength(node){//找出二叉树节点间的最大距离
+		if(node==null)
+			return;
+		if(node.left==null)
+			node.maxleft=0;
+		if(node.right==null)
+			node.maxright=0;
+		if(node.left!=null){
+			getMaxlength(node.left);
+			var tmp= node.left.maxleft>node.left.maxright? node.left.maxleft:node.left.maxright;
+			node.maxleft=tmp+1;
+		}
+		if(node.right!=null){
+			getMaxlength(node.right);
+			var tmp= node.right.maxleft>node.right.maxright? node.right.maxleft:node.right.maxright;
+			node.maxright=tmp+1;
+		}
+		if(node.maxleft+node.maxright>max)
+			max=node.maxleft+node.maxright;
+	}
+	getMaxlength(bst.root);
+	console.log(max);
+</script>
+</html>

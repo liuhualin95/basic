@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>表格排序</title>
+	<meta charset="utf-8">
+</head>
+<style>
+    table{
+      width: 500px;
+      height: 200px;
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    tr{
+      height: 40px;
+      text-align: center;
+    }
+    th,td{
+      width: 25%;
+      border: 1px solid black;
+    }
+</style>
+<body>
+<!-- 点击表头的属性区域，将表格信息进行排序切换功能，即第一次点击为降序排序，再一次点击进行升序排序。 -->
+	<table id="table">
+	    <thead>
+	        <tr bgcolor="grey">
+	            <th>姓名</th>
+	            <th>力量</th>
+	            <th>敏捷</th>
+	            <th>智力</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td>德鲁伊</td>
+	            <td>17</td>
+	            <td>24</td>
+	            <td>13</td>
+	        </tr>
+	        <tr>
+	            <td>月之骑士</td>
+	            <td>15</td>
+	            <td>22</td>
+	            <td>16</td>
+	        </tr>
+	        <tr>
+	            <td>众神归王</td>
+	            <td>19</td>
+	            <td>15</td>
+	            <td>20</td>
+	        </tr>
+	        <tr>
+	            <td>流浪剑客</td>
+	            <td>23</td>
+	            <td>15</td>
+	            <td>14</td>
+	        </tr>
+	    </tbody>
+	</table>
+<script type="text/javascript">
+  var validateArr=[false,false,false,false];
+  var table = document.getElementById("table");
+  var tbody = table.getElementsByTagName("tbody")[0];
+  var ths = table.getElementsByTagName("th");
+  for(var i=0;i<ths.length;i++){
+    ths[i].onclick=function(j){
+      return function(){
+        sortTable(j);
+      }
+    }(i);
+  }
+  function sortTable(num){
+    var rowsArr = [],
+        colsArr = [],
+        tmpArr = [],
+        tmpColsArr = [];
+    for(var i=0;i<tbody.rows.length;i++){
+      rowsArr[i]=tbody.rows[i];
+      colsArr[i]=rowsArr[i].cells[num];
+    }
+    if(!validateArr[num]){
+      colsArr.sort(function(a, b){
+        return b.innerHTML - a.innerHTML;
+      });
+      validateArr[num]=true;
+    }else{
+      colsArr.sort(function(a, b){
+        return a.innerHTML - b.innerHTML;
+      });
+      validateArr[num]=false;
+    }
+    for(var j=0;j<tbody.rows.length;j++){
+      tmpArr[j] = [];
+      for(var k=0;k<rowsArr[0].cells.length;k++){
+        tmpArr[j][k] = colsArr[j].parentNode.cells[k].innerHTML;
+      }
+    }
+    for(var j=0;j<tbody.rows.length;j++){
+      for(var k=0;k<rowsArr[0].cells.length;k++){
+        tbody.rows[j].cells[k].innerHTML = tmpArr[j][k];
+      }
+    }
+  } 
+</script>
+</body>
+</html>
