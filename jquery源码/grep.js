@@ -3,7 +3,7 @@ $.grep = function(arr, callback, inv){
 	var res=[],resVal,i=0,len=arr.length;
 	inv = !!inv;
 	for(;i<len;i++){
-		resVal = !!callback.call(arr[i], i);//这里先value，后key,!!转成布尔型
+		resVal = !!callback(arr[i], i);//这里先value，后key,!!转成布尔型
 		if(resVal !== inv)
 			res.push(arr[i]);
 	}
