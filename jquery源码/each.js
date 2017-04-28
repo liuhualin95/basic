@@ -31,5 +31,5 @@ $.each = function(obj, callback, args){
 			}
 		}
 	}
-	return obj;
+	return obj;//最后有返回obj,一直没注意过
 }
