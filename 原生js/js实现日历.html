@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js实现日历</title>
+	<meta charset="utf-8">
+</head>
+<style type="text/css">
+	table{
+		width: 250px;
+		height: 200px;
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	tr{
+		text-align: center;
+	}
+	th, td{
+		border: 1px solid black;
+		height: 25px;
+	}
+	.today{
+      background-color: red;
+    }
+</style>
+<body>
+	<table style="margin-bottom: 20px;">
+		<thead>
+			<tr>
+				<th>一</th>
+				<th>二</th>
+				<th>三</th>
+				<th>四</th>
+				<th>五</th>
+				<th>六</th>
+				<th>日</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			</tr>
+			<tr>
+				<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			</tr>
+			<tr>
+				<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			</tr>
+			<tr>
+				<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			</tr>
+			<tr>
+				<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			</tr>
+			<tr>
+				<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+<script type="text/javascript">
+	function isLeap(year){
+		return year%4==0? (year%100!=0 ? 1 : (year%400==0? 1:0) ) : 0;
+	}
+	function calendar(year, month){//month为[0-11]，记得减1
+		var oDay = new Date(), nVal = 1, oCurrent,
+			days_per_month = [31, 28 + isLeap(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+			oY = oDay.getFullYear(),
+			oM = oDay.getMonth(),
+			oD = oDay.getDate(),
+			dayOfWeek = new Date(year, month-1, 1).getDay()-1;//星期几 0代表日 1-6代表周一到周六
+		oCurrent = (oY==year && oM==month-1) ? true : false;
+		var alltd = [].slice.call(document.getElementsByTagName("td"));
+		alltd.forEach(function(atd, index){
+			if(index >= dayOfWeek && nVal <= days_per_month[month-1]){
+				atd.innerHTML = nVal;
+				if(oCurrent && nVal == oD)
+					atd.className = "today";
+				nVal++;
+			}else{
+				atd.innerHTML = "";
+			}
+		})
+	}
+	calendar(2017, 4);
+</script>
+<script type="text/javascript">
+	function isLeap(year){
+		return year%4==0? (year%100!=0 ? 1 : (year%400==0? 1:0) ) : 0;
+	}
+	var today = new Date(), index, nVal = 1,
+		y = today.getFullYear(),//年
+		m = today.getMonth(),//月
+		d = today.getDate(),//日
+		firstDay = new Date(y, m, 1),//获取当月第一天
+		days_per_month = new Array(31, 28 + isLeap(y), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31),
+		nStart = firstDay.getDay()-1,//星期几 0代表日 1-6代表周一到周六
+		rowNums = Math.ceil((nStart+days_per_month[m])/7);//多少行
+	document.write("<table><tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>");
+	for(var i=0;i<rowNums;i++){
+		document.write("<tr>");
+		for(var j=0;j<7;j++){
+			index = i*7 + j;
+			if(index>=nStart && nVal<=days_per_month[m]){
+				nVal==d? document.write('<td class="today">'+ nVal +'</td>') : document.write('<td>'+ nVal +'</td>');
+				nVal++;
+			}else{
+				document.write('<td></td>')
+			}
+		}
+		document.write("</tr>");
+	}
+	document.write("</table>");
+</script>
+</html>
