@@ -6,7 +6,7 @@ $.inArray = function(ele, arr, i){
 	var len;
 	if(arr){
 		if(core_indexOf)//如果支持原生indexOf方法的话直接调用就可以
-			return core_indexOf.call(arr, ele, i);
+			return core_indexOf.call(arr, ele, i);//记得return
 		len = arr.length;
 		//然后判断i是否存在
 		i = i ? i<0? Math.max(0, len+i):i : 0;
