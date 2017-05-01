@@ -13,5 +13,5 @@ $.merge = function(first, second){//这里最好还是传入两个数组
 		}
 	}
 	first.length = i;
-	return first;
+	return first;//会修改第一个数组
 }
