@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js实现输入框自动补全</title>
+	<meta charset="utf-8">
+</head>
+<style type="text/css">
+	#bodyDiv{
+		width: 160px;
+	}
+	#inputUser{
+		width: 100%;
+	}
+	#showUser{
+		width: 100%;
+	}
+	#showUser table{
+		width: 100%;
+	}
+	#showUser table a{
+		color: black;
+		text-decoration: none;
+	}
+</style>
+<body onload="init()">
+	<div id="bodyDiv">
+		<input type="text" name="text" id="inputUser" value="" onfocus="inputFocus()" onblur="inputBlur()" onkeydown="inputKeydown(event)">
+		<div id="showUser">
+			<!-- 这里放数据 使用table标签 -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var source = ['0123','023',123,1234,212,214,'033333','0352342',1987,17563,20932], inputValue;   //使用数组模拟后台数据
+	function init(){
+		var inputUser = document.getElementById("inputUser");
+		var showUser = document.getElementById("showUser");
+		
+		showUser.style.display = "none";
+		inputValue = inputUser.defaultValue;
+	}
+	function inputFocus(){
+		this.timer = setInterval(function(){
+			if(inputUser.value != ""){
+				if(inputValue != inputUser.value){
+					inputValue = inputUser.value;
+					var reg = new RegExp("^" + inputUser.value);
+					showUser.style.display = "block";
+					showUser.innerHTML = "";//每次更新都要先清空之前的内容
+					var table = document.createElement("table");
+					table.id = "table";
+					for(var i=0;i<source.length;i++){
+						if(reg.exec(source[i]) != null){
+							var tr = document.createElement("tr");
+							tr.innerHTML = '<td><a href="javascript:void(0);">' + source[i] + '</a></td>';
+							table.appendChild(tr);
+						}
+					}
+					showUser.appendChild(table);
+				}
+			}else{
+				inputValue = inputUser.value;
+				showUser.style.display = "none";
+				showUser.innerHTML = "";
+			}
+		},200);
+	}
+	function inputKeydown(event){
+		event = event || window.event;
+		if(event.keyCode == 40){	//箭头↓
+			if(showUser.style.display == "block"){
+				showUser.getElementsByTagName("a")[0].focus();
+			}else{
+				inputUser.focus();
+			}
+		}else if(event.keyCode == 38){	//箭头↑
+			if(showUser.style.display == "block"){
+				showUser.getElementsByTagName("a")[showUser.getElementsByTagName("a").length-1].focus();
+			}else{
+				inputUser.focus();
+			}
+		}else if(event.keyCode == 9){	//tab处理
+			inputUser.focus();
+			showUser.style.display = "none";
+			showUser.innerHTML = "";
+		}
+	}
+	function inputBlur(){
+		clearInterval(this.timer);
+		var table = document.getElementById("table");
+		var current;
+		var aClick = function(){
+			inputUser.value = this.childNodes[0].nodeValue;
+			inputValue = inputUser.value;
+			inputUser.focus();
+			showUser.style.display = "none";
+			showUser.innerHTML = "";
+		}
+		var aFocus = function(){
+			for(var j=0;j<len;j++){
+				if(this.parentNode === table.childNodes[j].childNodes[0]){
+					current = j;
+					break;
+				}
+			}
+			this.parentNode.parentNode.style.background = "#ccc";
+		}
+		var aBlur = function(){
+			this.parentNode.parentNode.style.background = "transparent";
+		}
+		var aKeydown = function(event){
+			event = event || window.event;
+			if(event.keyCode == 40){	//箭头↓
+				current++;
+				if(current > len-1){
+					inputUser.focus();
+				}else{
+					showUser.getElementsByTagName("a")[current].focus();
+				}
+			}else if(event.keyCode == 38){	//箭头↑
+				current--;
+				if(current < 0){
+					inputUser.focus();
+				}else{
+					showUser.getElementsByTagName("a")[current].focus();
+				}
+			}else if(event.keyCode == 9){	//tab处理
+				inputUser.focus();
+				showUser.style.display = "none";
+				showUser.innerHTML = "";
+			}
+		}
+		if(table){
+			var as = table.getElementsByTagName("a");
+			var len = as.length;
+			for(var i=0;i<len;i++){
+				as[i].onclick = aClick;
+				as[i].onfocus = aFocus;
+				as[i].onblur = aBlur;
+				as[i].onkeydown = aKeydown;
+			}
+		}
+	}
+</script>
+</html>
