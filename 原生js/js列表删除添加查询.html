@@ -150,6 +150,14 @@
       init();
     }
   }
+  //寻找当前页面节点元素里宽高均大于50的节点
+  function find(){
+    var tag = document.querySelectorAll("body *");
+    return Array.prototype.filter.call(tag, function(node){
+      return node.offsetWidth>50 && node.offsetHeight>50;
+    });
+  }
+  console.log(find());
 </script> 
 </html>
 
