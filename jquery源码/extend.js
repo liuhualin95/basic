@@ -26,7 +26,7 @@ $.extend=$.fn.extend=function(){
 				src = target[name];
 				copy = options[name];
 				//防止成环, 避免循环引用 例如$.extend(true, target, {'target':target});
-				if(copy==target)
+				if(copy===target)
 					continue;
 				//isPlainObject只能判断{}和new Object(),这里只判断{}和[],copy值为匿名函数时不在这里处理
 				if(deep && copy && ( jQuery.isPlainObject(copy) || (copyIsArray=jQuery.isArray(copy)) )){
