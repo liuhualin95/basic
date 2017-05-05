@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>实现一个可拖动的div</title>
+	<meta charset="utf-8">
+</head>
+<style type="text/css">
+	#box{
+		width: 50px;
+		height: 50px;
+		background-color: red;
+		position: absolute;
+		left: 50px;
+		top: 50px;
+	}
+</style>
+<body>
+	<div id="box">1</div>
+</body>
+<script type="text/javascript">
+	var box = document.getElementById("box"),
+		flag = false, mx, my, x, y;
+	box.onmousedown = function(e){
+		var e = e || window.event;
+		flag = true;
+		mx = e.clientX;
+		my = e.clientY;
+		x = box.offsetLeft;
+		y = box.offsetTop;
+		box.style.cursor = "move";
+	}
+	box.onmousemove = function(e){
+		var e = e || window.event;
+		if(flag){
+			box.style.left = e.clientX - mx + x + 'px';
+			box.style.top = e.clientY - my + y + 'px';
+			box.style.cursor = "move";
+		}
+	}
+	box.onmouseup = function(){
+		flag = false;
+		box.style.cursor = "auto";
+	}
+</script>
+</html>
