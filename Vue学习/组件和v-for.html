@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>组件和v-for</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<div id="example">
+		<input type="text" v-model="newItem" @keyup.enter="addItem">
+		<!-- 字面量语法传递的字符串 如string="12" 这个传过去是字符串
+		动态语法 如 :number="123" 这个传过去是数字
+		动态props可以动态绑定props的值到父组件的数据中 -->
+		<ul>
+			<li is="li-component" v-for="(item, index) in items" :content="item"
+				@remove="items.splice(index, 1)" :number="123" string="12"></li>
+		</ul>
+	</div>
+
+	<div id="example2">
+		<button @click="consl">click me</button>
+		<button @click="changeName">change name</button>
+		<example-two-component :number="size" :name="name"></example-two-component>
+	</div>
+
+	<div id="example3">
+		<p>{{total}}</p>
+		<!-- html属性不区分大小写 不能写成addTotal 可以使用kebab-case(短横线隔开式) -->
+		<example-three-component @add-total="addTotalNum"></example-three-component>
+		<example-three-component @add-total="addTotalNum"></example-three-component>
+		<example-three-component @add-total="addTotalNum"></example-three-component>
+	</div>
+</body>
+<script src="./vue.js"></script>
+<script type="text/javascript">
+	//template只能有一个root元素
+	Vue.component('li-component', {
+		props: ['content', 'number', 'string'],
+		template:`
+			<li>
+				{{content}}{{typeof number}}{{typeof string}}{{string}}
+				<button @click="$emit('remove')">&times;</button>
+			</li>
+		`
+	})
+	// Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新。这些方法如下：
+	// push()、pop()、shift()、unshift()、splice()、sort()、reverse()
+	var vm = new Vue({
+		el: '#example',
+		data: {
+			newItem: '',
+			items: [
+				"hello, boy!",
+				"hello, girl!",
+				"hello, madam!"
+			]
+		},
+		methods: {
+			addItem: function(){
+				if(this.newItem!=''){
+					this.items.push(this.newItem);
+					this.newItem = '';
+				}
+			}
+		}
+	})
+
+	//父组件的数据变化时，data方式不会变，computed会变
+	Vue.component('example-two-component', {
+		props: ['number', 'name'],
+		data: function(){
+			return {counter : this.number + 1};
+		},
+		computed: {
+			upperCaseName: function(){
+				return this.name.toUpperCase();
+			},
+			// counter: function(){
+			// 	return this.number + 1;
+			// }
+		},
+		template:`
+			<div>
+				<span>{{counter}}</span>
+				<span>{{upperCaseName}}</span>
+				<br>
+				<span>{{this.number}}</span>
+				<span>{{this.name}}</span>
+			</div>
+		`
+	})
+	var example2 = new Vue({
+		el: '#example2',
+		data: {
+			name: 'linzi',
+			size: 0
+		},
+		methods: {
+			consl: function(event){
+				console.log(this.name);
+				console.log(this.size);
+				if(event)
+					console.log(event.target.nodeName.toLowerCase());
+			},
+			changeName: function(){
+				this.name = 'xiaohua';
+				this.size += 1;
+			}
+		}
+	})
+
+	Vue.component('example-three-component', {
+		data: function(){
+			return {count : 0};
+		},
+		template:`
+			<button @click="addCount">{{count}}</button>
+		`,
+		methods: {
+			addCount: function(){
+				this.count++;
+				this.$emit("add-total");
+			}
+		}
+	})
+	var example3 = new Vue({
+		el: '#example3',
+		data: {
+			total: 0
+		},
+		methods: {
+			addTotalNum: function(){
+				this.total+=1;
+			}
+		}
+	})
+</script>
+</html>

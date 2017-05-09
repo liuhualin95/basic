@@ -12,13 +12,26 @@
 		<p :title="seen" v-if="seen">Hover on me</p>
 		<p @click="show">{{message2}}</p>
 		<input type="text" v-model="message2">
-		<!-- <ul>
-			<li v-for="person in people">{{person.id}}</li>
-		</ul> -->
+		<!-- 同一节点上时，v-for具有比v-if更高的优先级 -->
 		<ol>
-			<first-component v-for="person in people" :item="person" :key="person"></first-component>
+			<li is="first-component" v-for="person in people" v-if="person.id>2" :item="person" :key="person"></li>
 		</ol>
 		<button @click="consl">click</button>
+		<!-- v-for遍历对象 值、键名、索引 -->
+		<ul>
+			<li v-for="(value, key, index) in object">	
+				{{index}} : {{key}} : {{value}}
+			</li>
+		</ul>
+		<!-- v-for遍历数组 -->
+		<ol>
+			<li v-for="val in arr">{{val}}</li>
+		</ol>
+		<ol>
+			<li v-for="person in people">{{person.id}}</li>
+		</ol>
+		<button @click="remove">remove</button>
+		<span v-for="n in evenNums">{{n}}</span>
 	</div>
 </body>
 <script src="./vue.js"></script>
@@ -38,7 +51,14 @@
 				{id : 2},
 				{id : 3},
 				{id : 4}
-			]
+			],
+			object: {
+		      firstName: 'John',
+		      lastName: 'Doe',
+		      age: 30
+		    },
+		    arr: ['a', 'b', 'c'],
+		    numbers: [1,2,3,4,5,6,7,8,9]
 		},
 		methods: {
 			hide: function(){
@@ -49,14 +69,26 @@
 			},
 			consl: function(){
 				console.log(document.getElementsByTagName("p")[0].id);
+			},
+			remove: function(){
+				this.people.splice(0, 1, {id : 0});
+				console.log(this.people[0].id);
+				console.log(this.people[0]);
 			}
 		},
 		created: function(){	//created这个钩子会在实例被创建之后调用
 			console.log(this.message1);		//钩子的this指向vm实例
 		},
-		filters: {
+		filters: {	//管道符后面的过滤器
 			capitalize: function(value){
 				return value.toString().charAt(0).toUpperCase() + value.slice(1);
+			}
+		},
+		computed: {	 //计算属性基于它的依赖缓存，只有在它的相关依赖改变时才会重新取值
+			evenNums: function(){
+				return this.numbers.filter(function(val){
+					return val%2 === 0;
+				})
 			}
 		}
 	})
