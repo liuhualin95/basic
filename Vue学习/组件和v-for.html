@@ -25,9 +25,11 @@
 	<div id="example3">
 		<p>{{total}}</p>
 		<!-- html属性不区分大小写 不能写成addTotal 可以使用kebab-case(短横线隔开式) -->
+		<example-three-component @add-total="addTotalNum">{{price}}</example-three-component>
 		<example-three-component @add-total="addTotalNum"></example-three-component>
 		<example-three-component @add-total="addTotalNum"></example-three-component>
-		<example-three-component @add-total="addTotalNum"></example-three-component>
+		<input type="text" v-model="price">
+		<input type="text" :value="price" @input="change">
 	</div>
 </body>
 <script src="./vue.js"></script>
@@ -113,7 +115,12 @@
 			return {count : 0};
 		},
 		template:`
-			<button @click="addCount">{{count}}</button>
+			<span>
+				<button @click="addCount">{{count}}</button>
+				<slot>
+					没有内容的时候我会显示
+				</slot>
+			</span>
 		`,
 		methods: {
 			addCount: function(){
@@ -125,11 +132,16 @@
 	var example3 = new Vue({
 		el: '#example3',
 		data: {
-			total: 0
+			total: 0,
+			price: 5
 		},
 		methods: {
 			addTotalNum: function(){
 				this.total+=1;
+			},
+			change: function(event){
+				console.log(event.target.value);
+				this.price=event.target.value;
 			}
 		}
 	})

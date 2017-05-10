@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>slot插槽</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<div id="example1">
+		<child>
+			<h2 slot="header">我是标题</h2>
+			<p>这里是内容区域，会匹配匿名slot</p>
+			<p slot="footer">我是footer</p>
+			<!-- 在父级中，具有特殊属性 scope 的 <template> 元素，表示它是作用域插槽的模板。scope 的值对应一个临时变量名，此变量接收从子组件中传递的 prop 对象
+			作用域插槽也可以被命名 如slot="item" -->
+			<template slot="item" scope="props">
+				<p>{{props.text}}{{props.title}}</p>
+			</template>
+		</child>
+
+		<another-child :items="items">
+			<li>我是个li</li>
+			<template slot="lis" scope="props">
+				<li>{{props.text}}</li>
+			</template>
+		</another-child>
+
+		<component :is="currentComponent" @change-third-btn="changeThirdBtn">
+		</component>
+		<div>
+			<button @click="toHeader">toHeader</button>
+			<button @click="toButton">toButton</button>
+			<button @click="toPara">toPara</button>
+		</div>
+	</div>
+</body>
+<script src="./vue.js"></script>
+<script type="text/x-template" id="child-template">
+	<div>
+		<header>
+			<slot name="header">header内容暂时不存在</slot>
+		</header>
+		<main>
+			<slot>这里是匿名slot,未匹配内容暂时不存在</slot>
+		</main>
+		<footer>
+			<slot name="footer">footer内容暂时不存在</slot>
+		</footer>
+		<slot name="item" text="作用域插槽" title="我是p元素"></slot>
+	</div>
+</script>
+<script type="text/javascript">
+	Vue.component('child', {
+		template: '#child-template'
+	})
+	Vue.component('another-child', {
+		props: ['items'],
+		// 根据v-for创建多个slot 对应匹配作用域插槽的li
+		template:`
+			<ul>
+				<slot></slot>
+				<slot name="lis" v-for="item in items" :text="item.text"></slot>
+			</ul>
+		`
+	})
+	var example1 = new Vue({
+		el: '#example1',
+		data: {
+			items: [
+				{text: "a"},
+				{text: "b"},
+				{text: "c"}
+			],
+			currentComponent: 'first-component'
+		},
+		components: {
+			"first-component": {
+				template: `<p>我是个段落</p>`
+			},
+			"second-component": {
+				template: `<h3>我是个标题</h3>`
+			},
+			"third-component": {
+				template: `<button @click="$emit('change-third-btn')">click me</button>`
+			}
+		},
+		methods: {
+			toHeader: function(){
+				this.currentComponent = "second-component";
+			},
+			toButton: function(){
+				this.currentComponent = "third-component";
+			},
+			toPara: function(){
+				this.currentComponent = "first-component";
+			},
+			changeThirdBtn: function(){
+				document.getElementsByTagName("button")[3].innerHTML="变了";
+			}
+		}
+	})
+</script>
+</html>
