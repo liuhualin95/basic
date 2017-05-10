@@ -68,7 +68,7 @@
 
 	//父组件的数据变化时，data方式不会变，computed会变
 	Vue.component('example-two-component', {
-		props: ['number', 'name'],
+		props: ['name', 'number'],
 		data: function(){
 			return {counter : this.number + 1};
 		},
