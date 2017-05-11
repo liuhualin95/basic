@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>数据双绑</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="text">
+		{{text}}
+	</div>
+	<script type="text/javascript">
+		// vue数据双向绑定的原理：
+		// 1、new Vue实例的时候主要做两件事，第一监听数据，第二编译html
+		// 2、监听数据的时候会为data的每一个属性创建一个主题对象dep
+		// 3、编译html时会为每个绑定数据的文本节点创建一个订阅者watcher，被添加到相应属性的dep中去
+		// 4、数据变化时调用set方法，触发里面的dep.notify()函数发布通知，然后订阅此dep的所有watcher会调用自身update方法更新数据
+
+		function observe(data, vm){
+			Object.keys(data).forEach(function(name){
+				defineReactive(vm, name, data[name]);
+			});
+		}
+		//在监听数据的过程中，会为data里面的每一个属性创建一个主题对象dep
+		function defineReactive(vm, name, val){
+			var dep = new Dep();
+			Object.defineProperty(vm, name, {
+				get: function(){
+					if(Dep.target) dep.addSub(Dep.target);
+					return val;
+				},
+				set: function(newVal){
+					if(newVal == val) return;
+					val = newVal;
+					console.log(val);
+					dep.notify();
+				}
+			});
+		}
+		function nodeToFragment(node, vm){
+			var flag = document.createDocumentFragment();
+			var child;
+			while(child = node.firstChild){
+				compile(child, vm);
+				flag.appendChild(child);
+			}
+			return flag;
+		}
+		function compile(node, vm){
+			var reg = /\{\{(.*)\}\}/;
+			if(node.nodeType == 1){
+				var attr = node.attributes;
+				for(var i=0;i<attr.length;i++){
+					if(attr[i].nodeName == 'v-model'){
+						var name = attr[i].nodeValue;
+						node.addEventListener('input',function(e){
+							vm[name] = e.target.value;
+						});
+						node.value = vm[name];
+						node.removeAttribute('v-model');
+					}
+				}
+			}
+			//在编译html时，会为绑定数据的每个文本节点生成一个订阅者watcher
+			//watcher会将自身添加到相应属性的dep中去
+			if(node.nodeType == 3){
+				if(reg.test(node.nodeValue)){
+					var name = RegExp.$1.trim();
+					new Watcher(vm, node, name);
+				}
+			}
+		}
+		function Watcher(vm, node, name){
+			Dep.target = this;
+			this.vm = vm;
+			this.node = node;
+			this.name = name;
+			this.update();
+			Dep.target = null;
+		}
+		Watcher.prototype.update = function(){
+			this.node.nodeValue = this.vm[this.name];
+		}
+		function Dep(){
+			this.subs = [];
+		}
+		Dep.prototype = {
+			addSub: function(sub){
+				this.subs.push(sub);
+			},
+			notify: function(){
+				this.subs.forEach(function(sub){
+					sub.update();
+				});
+			}
+		}
+		//创建Vue实例时主要做了两件事：第一监听数据，第二编译html(nodeToFragment)
+		function Vue(options){
+			this.data = options.data;
+			observe(this.data, this);
+
+			var id = options.el;
+			var dom = nodeToFragment(document.getElementById(id), this);
+			document.getElementById(id).appendChild(dom);
+		}
+		var vm = new Vue({
+			el: 'app',
+			data: {
+				text: 'hello world'
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Render函数</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<div id="example1">
+		<anchored-heading :level="1">
+			<p>Hello world!</p>
+		</anchored-heading>
+	</div>
+
+	<div id="example2">
+		<ul-component :items="items"></ul-component>
+	</div>
+
+	<div id="example3">
+		<render-component :items="items"></render-component>
+	</div>
+	<!-- 不要修改父元素传进子元素的值  -->
+	<div id="example4">
+		{{price}}
+		<input-component v-model="price"></input-component>
+	</div>
+	<!-- 不要修改父元素传进子元素的值  -->
+	<div id="example5">
+		{{price}}
+		<render-input-component v-model="price"></render-input-component>
+	</div>
+</body>
+<script src="./vue.js"></script>
+<script type="text/javascript">
+	Vue.component('anchored-heading', {
+		props: {
+			level: {
+				type: Number,
+				required: true
+			}
+		},
+		render: function(createElement){
+			return createElement(
+				'h' + this.level,
+				[
+					createElement(
+						'a',
+						{
+							attrs: {
+								name: 'hello-world',
+								href: '#hello-world'
+							}
+						},
+						this.$slots.default
+					),
+					// Array.apply(null, {length: 5}).map(function(){
+					// 	return createElement('p','hi');
+					// })
+				]
+			)
+		}
+	})
+	var example1 = new Vue({
+		el: '#example1'
+	})
+
+	Vue.component('ul-component', {
+		props: ['items'],
+		template: `
+			<ul v-if="items.length">
+				<li v-for="item in items">{{item.name}}</li>
+			</ul>
+			<p v-else>No items found.</p>
+		`
+	})
+	var example2 = new Vue({
+		el: '#example2',
+		data: {
+			items: [
+				// {name: 'zhangsan'},
+				// {name: 'lisi'},
+				// {name: 'wangwu'}
+			]
+		}
+	})
+
+	Vue.component('render-component', {
+		props: ['items'],
+		render: function(createElement){
+			if(this.items.length){
+				return createElement('ul', this.items.map(function(item){
+							return createElement('li', item.name);
+				}))
+			}else
+				return createElement('p', 'No items found.');
+		}
+	})
+	var example3 = new Vue({
+		el: '#example3',
+		data: {
+			items: [
+				{name: 'zhangsan'},
+				{name: 'lisi'},
+				{name: 'wangwu'}
+			]
+		}
+	})
+
+	Vue.component('input-component', {
+		props: ['value'],
+		template:`
+			<input :value="value" @input="updateValue">
+		`,
+		methods: {
+			updateValue: function(event){
+				// this.value = event.target.value;
+				this.$emit('input', event.target.value)
+			}
+		}
+	})
+	var example4 = new Vue({
+		el: '#example4',
+		data: {
+			price: 4
+		}
+	})
+
+	Vue.component('render-input-component', {
+		props: ['value'],
+		render: function(createElement){
+			var self = this;
+			return createElement('input', {
+				domProps: {
+					value: this.value
+				},
+				on: {
+					input: function(event){
+						// self.value = event.target.value;
+						self.$emit('input', event.target.value);
+					}
+				}
+			});
+		}
+	})
+	var example5 = new Vue({
+		el: '#example5',
+		data: {
+			price: 5
+		}
+	})
+</script>
+</html>
