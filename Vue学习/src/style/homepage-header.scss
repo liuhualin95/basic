@@ -1,0 +1,123 @@
+.header-container{
+	position: relative;
+	width: 100%;
+	height: 4rem;
+	background: rgb(198, 47, 47);
+	>img{
+		margin-top: .7rem;
+	}
+	input{
+		width: 20rem;
+		height: 2rem;
+		background: rgb(168, 40, 40);
+		border-radius: 1rem;
+		position: absolute;
+		border: none;
+		outline: none;
+		top: 1rem;
+		left: 20rem;
+		font-size: 1.2rem;
+		padding-left: 1.2rem;
+		color: #fff;
+		&::placeholder{
+			color: #c87676;
+		}
+	}
+	.icon-search{
+		position: absolute;
+		left: 39rem;
+		top: 1.3rem;
+		color: #c87676;
+		cursor: pointer;
+		&:hover{
+			color: #fff;
+		}
+	}
+	.header-right{
+		float: right;
+		width: 35rem;
+		height: 100%;
+		.user-details{
+			float: left;
+			display: inline-block;
+			width: 12rem;
+			height: 100%;
+			line-height: 3.9rem;
+			.avatar{
+				width: 2.5rem;
+				height: 2.5rem;
+				border-radius: 2rem;
+				margin-left: 2rem;
+				margin-top: -0.3rem;
+				vertical-align: middle;
+				cursor: pointer;
+			}
+			span{
+				margin-left: .7rem;
+				color: rgb(238, 193, 193);
+				cursor: pointer;
+				font-size: 1.2rem;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				&:hover{
+					color: #fff;
+				}
+			}
+			.small-triangle{
+				cursor: pointer;
+				display: inline-block;
+				width: 0;
+				height: 0;
+				margin-bottom: -0.3rem;
+				margin-left: .4rem;
+				border-width: .46rem;
+				border-style: solid;
+				border-color: rgb(238, 193, 193) transparent transparent transparent;
+				&:hover{
+					border-color: #fff transparent transparent transparent;
+				}
+			}
+		}
+		.icon-list{
+			display: inline-block;
+			width: 11rem;
+			height: 4rem;
+			line-height: 4rem;
+			.icon{
+				color: #eeeeec;
+				cursor: pointer;
+				&:hover{
+					color: #fff;
+				}
+			}
+			.icon-email,
+			.icon-shezhi{
+				margin-left: 2.5rem;
+			}
+		}
+		.another-icon-list{
+			border-left: 1px solid rgb(238, 158, 193);
+			display: inline-block;
+			vertical-align: middle;
+			height: 1.8rem;
+			margin-top: -0.2rem;
+			line-height: 1.8rem;
+			width: 11.5rem;
+			.icon{
+				color: rgb(238, 193, 193);
+				cursor: pointer;
+				&:hover{
+					color: #fff;
+				}
+			}
+			.icon-minimize{
+				margin-left: 1.6rem;
+			}
+			.icon-minus,
+			.icon-zuidahua,
+			.icon-guanbi{
+				margin-left: .7rem;
+			}
+		}
+	}
+}
