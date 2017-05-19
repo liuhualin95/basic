@@ -1,0 +1,112 @@
+.slider-container{
+	position: absolute;
+	top: 4rem;
+	display: flex;
+	width: 20rem;
+	background: #f5f5f7;
+	.slider-list{
+		flex: 1;
+		overflow-y: auto;
+		&::-webkit-scrollbar{
+		width: 8px;
+		}
+		&::-webkit-scrollbar-thumb {
+	      border-radius: 8px;
+	      background-color: #e1e1e2;
+	      &:hover {
+	        background-color: #cfcfd1;
+	      }
+	    }
+	    >div{
+	    	height: 3.2rem;
+	    	line-height: 3.2rem;
+	    	padding-left: 1.6rem;
+	    	color: #898989;
+	    	font-size: 1.3rem;
+	    	user-select: none;
+	    	cursor: default;
+	    	margin-top: .4rem;
+	    	&:first-of-type{
+	    		margin-top: 0;
+	    	}
+	    	&.created-song-list,
+	    	&.collected-song-list{
+	    		position: relative;
+	    		.icon-add{
+	    			position: absolute;
+	    			top: .8rem;
+	    			right: 2rem;
+	    			color: rgb(92, 92, 92);
+	    			cursor: pointer;
+	    			&:hover{
+	    				color: black;
+	    			}
+	    		}
+	    		.icon-xiangxia,
+	    		.icon-you{
+	    			position: absolute;
+	    			top: .82rem;
+	    			right: .5rem;
+	    			width: 1.2rem;
+					height: 1.2rem;
+					color: rgb(160, 160, 160);
+	    			cursor: pointer;
+	    			&:hover{
+	    				color: rgb(80, 80, 80);
+	    			}
+	    		}
+	    	}
+	    }
+	    ul{
+			list-style: none;
+			width: 100%;
+			li{
+				width: 100%;
+				height: 2.8rem;
+				position: relative;
+				line-height: 2.8rem;
+				cursor: pointer;
+				color: rgb(92, 92, 92);
+				&:hover{
+					color: black;
+				}
+				span{
+					font-size: 1.2rem;
+					margin-left: 4.9rem;
+				}
+				.icon{
+					position: absolute;
+					left: 2.6rem;
+					top: .7rem;
+				}
+				input{
+					border: 1px solid rgb(225, 225, 226);
+					width: 11rem;
+					height: 1.8rem;
+					margin-left: 4.7rem;
+					outline: none;
+					padding-left: .2rem;
+				}
+			}
+		}
+	}
+	.little-song{
+		margin-top: 1rem;
+		width: 100%;
+		height: 5rem;
+		border-top: 1px solid rgb(225, 225, 226);
+		position: absolute;
+		img,
+		.shadow{
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 5rem;
+			height: 5rem;
+			cursor: pointer;
+		}
+		.shadow{
+			background: rgba(0, 0, 0, 0);
+		}
+	}
+}

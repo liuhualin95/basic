@@ -80,7 +80,7 @@
 		position: absolute;
 		padding-left: 0;
 		left: 0;
-		bottom: 0;
+		bottom: 2rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -96,6 +96,27 @@
 		}
 		.active{
 			background-color: #c62f2f;
+		}
+	}
+}
+@media screen and (min-width: 1450px){
+	.banner-container{
+		width: 100rem;
+		.img-container{
+			height: 90%;
+			ul{
+				li{
+					width: 50rem;
+					height: 100%;
+				}
+			}
+			.center{
+				width: 50rem;
+				height: 100%;
+			}
+		}
+		.box-list{
+			bottom: 0;
 		}
 	}
 }

@@ -2,7 +2,11 @@
 	<div class="header-container">
 		<img src="../assets/music-icon.png">
 		<label>
-			<input type="text"
+			<input type="text" 
+			v-model='searchText' 
+			@focus="inputFocus"
+			@blur="inputBlur"
+			@click="searchHandler(searchText)"
 			:placeholder="placeholder">
 			<svg class="icon icon-search" aria-hidden="true">
 			  <use xlink:href="#icon-sousuo"></use>
@@ -10,11 +14,106 @@
 		</label>
 		<div class="header-right">
 			<div class="user-details">
-				<!-- <div class="avatar-container"> -->
 				<img :src="avatar" class="avatar">
-				<!-- </div> -->
-				<span>{{userName}}</span>
-				<div class="small-triangle"></div>
+				<span @click="showUserDetail">{{userName}}</span>
+				<div class="small-triangle" @click="showUserDetail"></div>
+			</div>
+			<div v-if="showDetail" class="detail-content">
+				<div class="up-triangle"></div>
+				<div class="content-container">
+					<div>
+						<img :src="avatar" class="avatar">
+						<span>{{userName}}</span>
+						<button>
+							<svg class="icon icon-daohang" aria-hidden="true">
+							  <use xlink:href="#icon-daohang"></use>
+							</svg>
+							签到
+						</button>
+					</div>
+					<ul class="ul-first">
+						<li>
+							<p>0</p>
+							<p>动态</p>
+						</li>
+						<li>
+							<p>0</p>
+							<p>关注</p>
+						</li>
+						<li>
+							<p>0</p>
+							<p>粉丝</p>
+						</li>
+					</ul>
+					<ul class="ul-second">
+						<li>
+							<svg class="icon icon-huiyuanzhongxin" aria-hidden="true">
+							  <use xlink:href="#icon-huiyuanzhongxin"></use>
+							</svg>
+							<span>会员中心</span>
+							<span>未订购</span>
+							<svg class="icon icon-you" aria-hidden="true">
+							  <use xlink:href="#icon-you"></use>
+							</svg>
+						</li>
+						<li>
+							<svg class="icon icon-dengji" aria-hidden="true">
+							  <use xlink:href="#icon-dengji"></use>
+							</svg>
+							<span>等级</span>
+							<span style="margin-left: ">Lv.8</span>
+							<svg class="icon icon-you" aria-hidden="true">
+							  <use xlink:href="#icon-you"></use>
+							</svg>
+						</li>
+						<li>
+							<svg class="icon icon-jifenshangcheng" aria-hidden="true">
+							  <use xlink:href="#icon-jifenshangcheng"></use>
+							</svg>
+							<span>积分商城</span>
+							<span>102积分</span>
+							<svg class="icon icon-you" aria-hidden="true">
+							  <use xlink:href="#icon-you"></use>
+							</svg>
+						</li>
+						<li>
+							<svg class="icon icon-shezhi" aria-hidden="true">
+							  <use xlink:href="#icon-shezhi"></use>
+							</svg>
+							<span>个人信息设置</span>
+							<svg class="icon icon-you" aria-hidden="true">
+							  <use xlink:href="#icon-you"></use>
+							</svg>
+						</li>
+						<li>
+							<svg class="icon icon-toys" aria-hidden="true">
+							  <use xlink:href="#icon-toys"></use>
+							</svg>
+							<span>绑定社交账号</span>
+							<svg class="icon icon-you" aria-hidden="true">
+							  <use xlink:href="#icon-you"></use>
+							</svg>
+						</li>
+						<li>
+							<svg class="icon icon-add-library" aria-hidden="true">
+							  <use xlink:href="#icon-add-library"></use>
+							</svg>
+							<span>导入歌单</span>
+							<svg class="icon icon-you" aria-hidden="true">
+							  <use xlink:href="#icon-you"></use>
+							</svg>
+						</li>
+						<li>
+							<svg class="icon icon-tuichu" aria-hidden="true">
+							  <use xlink:href="#icon-tuichu"></use>
+							</svg>
+							<span>退出登录</span>
+							<svg class="icon icon-you" aria-hidden="true">
+							  <use xlink:href="#icon-you"></use>
+							</svg>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="icon-list">
 				<svg class="icon icon-skin" aria-hidden="true">
@@ -51,7 +150,32 @@
 			return {
 				placeholder: '搜索音乐，歌手，歌词，用户',
 				avatar: 'https://sfault-avatar.b0.upaiyun.com/147/223/147223148-573297d0913c5_huge256',
-				userName: '_小林'
+				userName: '_小林',
+				showDetail: false,
+				searchText: ''
+			}
+		},
+		methods: {
+			showUserDetail(){
+				this.showDetail = !this.showDetail;
+			},
+			inputFocus(){
+				this.placeholder = '';
+				document.querySelector(".icon-search").style.color = "#fff";
+			},
+			inputBlur(){
+				this.placeholder = '搜索音乐，歌手，歌词，用户';
+				let search = document.querySelector(".icon-search")
+				search.style.color = "#c87676";
+				search.onmouseover = () => {
+					search.style.color = "#fff";
+				};
+				search.onmouseout = () => {
+					search.style.color = "#c87676";
+				};
+			},
+			searchHandler(searchText){
+				//对输入内容进行处理
 			}
 		}
 	}
