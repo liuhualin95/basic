@@ -22,10 +22,10 @@ body{
 	overflow: auto;
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	.router-view {
-	    position: absolute;
-	    top: 4rem;
-	    right: 0;
-	    bottom: 4.6rem;
+		position: absolute;
+		right: 0;
+		bottom: 4.6rem;
+		top: 5rem;
 	    left: 20rem;
 	    overflow-x: hidden;
 	    overflow-y: auto;

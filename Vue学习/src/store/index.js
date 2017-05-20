@@ -8,6 +8,12 @@ Vue.use(Vuex);
 const state = {
 	collectedSongList: [
 		'收藏的歌单'
+	],
+	randomSongList: [
+		{
+			name: '不枉',
+			author: '汪小敏'
+		}
 	]
 }
 
