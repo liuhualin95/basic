@@ -5,6 +5,7 @@
 	background: rgb(198, 47, 47);
 	>img{
 		margin-top: .7rem;
+		cursor: pointer;
 	}
 	input{
 		width: 20rem;
@@ -180,6 +181,8 @@
 					text-align: middle;
 					line-height: 2.5rem;
 					border-radius: .7rem;
+					cursor: pointer;
+					outline: none;
 					.icon-daohang{
 						margin-left: -0.6rem;
 						margin-top: -0.2rem;

@@ -1,6 +1,7 @@
 <template>
 	<div class="header-container">
-		<img src="../assets/music-icon.png">
+		<img src="../assets/music-icon.png"
+		@click="goFindMusic">
 		<label>
 			<input type="text" 
 			v-model='searchText' 
@@ -145,16 +146,22 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex'
+	import Vue from 'vue'
+	
 	export default{
 		data(){
 			return {
 				placeholder: '搜索音乐，歌手，歌词，用户',
-				avatar: 'https://sfault-avatar.b0.upaiyun.com/147/223/147223148-573297d0913c5_huge256',
-				userName: '_小林',
 				showDetail: false,
 				searchText: ''
 			}
 		},
+		computed: mapState({
+			avatar: state => state.avatar,
+			userName: state => state.userName,
+			itemLists: state => state.itemLists
+		}),
 		methods: {
 			showUserDetail(){
 				this.showDetail = !this.showDetail;
@@ -176,6 +183,13 @@
 			},
 			searchHandler(searchText){
 				//对输入内容进行处理
+			},
+			goFindMusic(){
+				this.$router.push({name: 'FindMusic'})
+				this.itemLists.forEach( (item) => {
+					Vue.set(item, 'isActive', false)
+				})
+				Vue.set(this.itemLists[0], 'isActive', true)
 			}
 		}
 	}

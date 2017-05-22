@@ -1,0 +1,64 @@
+$color-border: rgb(225, 225, 226);
+.recommend-list-container{
+	width: 84rem;
+	margin: 0 auto;
+	>div:first-child{
+		border-bottom: 1px solid $color-border;
+		position: relative;
+		width: 100%;
+		height: 2.5rem;
+		span:nth-of-type(1){
+			font-size: 2rem;
+			cursor: default;
+		}
+		span:nth-of-type(2){
+			position: absolute;
+			right: 0;
+			bottom: .5rem;
+			font-size: 1.2rem;
+			cursor: pointer;
+			color: rgb(102, 102, 102);
+			.icon-you{
+				margin-left: -0.4rem;
+				width: 1rem;
+	    		height: 1rem;
+			}
+		}
+	}
+	.recommend-list{
+		width: 100%;
+		margin: 1.2rem 0 0;
+		.some-list{
+			>span{
+				color: rgb(17, 17, 17);
+				font-size: 1.2rem;
+				display: inline-block;
+				margin-top: .7rem;
+				margin-left: .2rem;
+				cursor: pointer;
+			}
+			.every-day{
+				width: 16.5rem;
+				height: 16.5rem;
+				position: relative;
+				background: #fff;
+				border: 1px solid $color-border;
+				cursor: pointer;
+				span{
+					position: absolute;
+					&:first-child{
+						left: 5.5rem;
+						top: 4rem;
+						font-size: 2.2rem;
+					}
+					&:nth-child(2){
+						left: 4.2rem;
+						top: 5.8rem;
+						font-size: 8.4rem;
+						color: rgb(198, 47, 47);
+					}
+				}
+			}
+		}
+	}
+}

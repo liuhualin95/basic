@@ -3,25 +3,25 @@
 		<div class="slider-list">
 			<div>推荐</div>
 			<ul class="recommend">
-				<li :class="{active: lisArray[0].isActive}">
+				<li :class="{active: recommendLis[0].isActive}">
 					<svg class="icon icon-yinle" aria-hidden="true">
 					  <use xlink:href="#icon-yinle"></use>
 					</svg>
 					<span>发现音乐</span>
 				</li>
-				<li :class="{active: lisArray[1].isActive}">
+				<li :class="{active: recommendLis[1].isActive}">
 					<svg class="icon icon-kanguo" aria-hidden="true">
 					  <use xlink:href="#icon-kanguo"></use>
 					</svg>
 					<span>私人FM</span>
 				</li>
-				<li :class="{active: lisArray[2].isActive}">
+				<li :class="{active: recommendLis[2].isActive}">
 					<svg class="icon icon-mv" aria-hidden="true">
 					  <use xlink:href="#icon-mv"></use>
 					</svg>
 					<span>MV</span>
 				</li>
-				<li :class="{active: lisArray[3].isActive}">
+				<li :class="{active: recommendLis[3].isActive}">
 					<svg class="icon icon-pengyou" aria-hidden="true">
 					  <use xlink:href="#icon-pengyou"></use>
 					</svg>
@@ -118,8 +118,9 @@
 			</ul>
 		</div>
 		<div class="little-song">
-			<img :src="songImg">
-			<div class="shadow">
+			<img :src="randomSong.songImg">
+			<div class="shadow"
+			@click="$router.push({name: 'RandomSong'})">
 				<svg class="icon icon-bianda-copy" aria-hidden="true">
 				  <use xlink:href="#icon-bianda-copy"></use>
 				</svg>
@@ -139,6 +140,8 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex'
+
 	export default {
 		data(){
 			return {
@@ -150,34 +153,29 @@
 				right: false,
 				collectDown: true,
 				collectRight: false,
-				lisArray: [],
-				createdSongList: [
-					'欢快的歌单',
-					'测试的歌单',
-					'欢快的歌单',
-					'测试的歌单',
-					'欢快的歌单',
-					'测试的歌单',
-					'欢快的歌单',
-					'测试的歌单'
-				],
-				songImg: 'http://p1.music.126.net/pNs4yiR4zlHyKeHRzvgHcw==/19123805742041026.jpg?param=140y140',
-				randomIndex: -1
+				recommendLis: [
+					{isActive: true},
+					{isActive: false},
+					{isActive: false},
+					{isActive: false}
+				]
 			}
 		},
-		computed: {
-			collectedSongList(){
-				return this.$store.state.collectedSongList;
-			},
-			randomSong(){
-				this.randomIndex++;
-				return this.$store.state.randomSongList[this.randomIndex];
-			}
-		},
+		computed: mapState({
+			collectedSongList: state => state.collectedSongList,
+			randomIndex: state => state.randomIndex,
+			randomSong: state => state.randomSongList[state.randomIndex],
+			createdSongList: state => state.createdSongList
+		}),
 		mounted(){
-			let lis = document.querySelector('.slider-list').querySelectorAll('li');
+			let lis = document.querySelector('.recommend').getElementsByTagName('li');
 			[].forEach.call(lis, (ali, index) => {
-				Vue.set(lisArray[index], 'isActive', false);
+				ali.addEventListener('click', () => {
+					this.recommendLis.forEach( (item) => {
+						item.isActive = false;
+					});
+					this.recommendLis[index].isActive = true;
+				})
 			})
 		},
 		methods: {
@@ -192,9 +190,9 @@
 					this.showCreateInput = false;
 					return;
 				}
-				this.createdSongList.push(newCreatedSong.trim());
-				this.newCreatedSong = '';
-				this.showCreateInput = false;
+				this.$store.dispatch('addToCreatedSongList', newCreatedSong.trim())
+				this.newCreatedSong = ''
+				this.showCreateInput = false
 			},
 			hide(){
 				this.showCreateInput = false;
@@ -218,18 +216,6 @@
 				this.collectDown = true;
 				this.collectRight = false;
 				this.showCollectedSongList = true;
-			},
-			selectStyle(){
-				let lis = document.querySelector('.slider-list').getElementsByTagName('li');
-				[].forEach.call(lis, (ali, index) => {
-					Vue.set(lisArray[index], 'isActive', false);
-				})
-				ali.addEventListener('click', () => {
-					this.lisArray.forEach( (item) => {
-						item.isActive = false;
-					});
-					this.lisArray[index].isActive = true;
-				})
 			}
 		},
 		directives: {

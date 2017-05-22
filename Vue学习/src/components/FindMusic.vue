@@ -1,11 +1,21 @@
 <template>
 	<div class="find-music-container">
-		<music-banner :imgs="imgList"></music-banner>
+		<div class="find-music-header">
+			<ul>
+				<li v-for="(item, index) in itemLists" 
+				@click="selectStyle(index)"
+				:class="{active: item.isActive}">
+					{{item.content}}
+				</li>
+			</ul>
+		</div>
+		<router-view :imgs="imgList" name="banner"></router-view>
+		<router-view name="recommendList"></router-view>
 	</div>
 </template>
 
 <script>
-	import MusicBanner from './MusicBanner'
+	import Vue from 'vue'
 
 	export default {
 		data(){
@@ -19,11 +29,25 @@
 		        'http://p4.music.126.net/F7yr2uUq982rTIWlwvaThg==/18964376555989729.jpg',
 		        'http://p4.music.126.net/qADzamZDC3c5whBibC_rAQ==/18906102439712983.jpg',
 		        'http://p3.music.126.net/AnIXfPFhm7amqevP7HEXng==/19210667160589857.jpg'
-		    	],
+		    	]
 			}
 		},
-		components: {
-			'music-banner': MusicBanner
+		computed: {
+			itemLists(){
+				return this.$store.state.itemLists
+			}
+		},
+		methods: {
+			selectStyle(index){
+				this.$router.push({name: this.itemLists[index].name})
+				this.itemLists.forEach( (item) => {
+					Vue.set(item, 'isActive', false)
+				})
+				Vue.set(this.itemLists[index], 'isActive', true)
+			}
+		},
+		mounted(){
+			Vue.set(this.itemLists[0], 'isActive', true)
 		}
 	}
 </script>
