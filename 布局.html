@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>布局</title>
+	<meta charset="utf-8">
+</head>
+<style type="text/css">
+	#demo1, #demo2, #demo3, #demo4, #demo5, 
+	#demo6, #demo7, #demo8, #demo9, #demo10,
+	#demo11{
+		margin-top: 10px;
+	}
+	/*.clear{
+		overflow: hidden;
+	}*/
+	.clear:after{
+		display: block;
+		width: 0;
+		height: 0;
+		visibility: hidden;
+		clear: both;
+		content: '';
+	}
+	#demo1 .left{
+		float: left;
+		width: 200px;
+		height: 100px;
+		border: 1px solid blue;
+	}
+	#demo1 .right{
+		height: 100px;
+		margin-left: 210px;
+		border: 1px solid red;
+	}
+	#demo2 .right{
+		float: right;
+		width: 200px;
+		height: 100px;
+		border: 1px solid blue;
+	}
+	#demo2 .left{
+		height: 100px;
+		margin-right: 210px;
+		border: 1px solid red;
+	}
+	#demo3 .left{
+		float: left;
+		width: 200px;
+		height: 100px;
+		border: 1px solid blue;
+	}
+	#demo3 .right{
+		float: right;
+		width: 200px;
+		height: 100px;
+		border: 1px solid blue;
+	}
+	#demo3 .mid{
+		height: 100px;
+		margin-left: 210px;
+		margin-right: 210px;
+		border: 1px solid red;
+	}
+	#demo4{
+		padding: 0 200px;
+	}
+	#demo4 .mid{
+		float: left;
+		width: 100%;
+		height: 100px;
+		background-color: red;
+	}
+	#demo4 .left{
+		float: left;
+		width: 200px;
+		height: 100px;
+		background-color: yellow;
+		margin-left: -100%;
+		position: relative;
+		left: -200px;
+	}
+	#demo4 .right{
+		float: left;
+		width: 200px;
+		height: 100px;
+		background-color: yellow;
+		margin-left: -200px;
+		position: relative;
+		left: 200px;
+	}
+	#demo5 .mid{
+		float: left;
+		width: 100%;
+		height: 100px;
+		background-color: red;
+	}
+	#demo5 .mid .inner{
+		margin: 0 200px;
+	}
+	#demo5 .left{
+		float: left;
+		width: 200px;
+		height: 100px;
+		background-color: yellow;
+		margin-left: -100%;
+	}
+	#demo5 .right{
+		float: left;
+		width: 200px;
+		height: 100px;
+		background-color: yellow;
+		margin-left: -200px;
+	}
+	#demo6{
+		width: 100%;
+		height: 100px;
+		border: 1px solid red;
+		text-align: center;
+	}
+	#demo6 span{
+		line-height: 100px;
+	}
+	#demo7{
+		width: 100%;
+		height: 100px;
+		border: 1px solid red;
+	}
+	#demo7 div{
+		width: 200px;
+		height: 50px;
+		border: 1px solid blue;
+		margin: 0 auto;
+		text-align: center;
+	}
+	#demo8{
+		width: 100%;
+		height: 100px;
+		border: 1px solid red;
+		position: relative;
+	}
+	#demo8 div{
+		width: 200px;
+		height: 50px;
+		border: 1px solid blue;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-102px,-24px);
+	}
+	#demo9{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100px;
+		border: 1px solid red;
+	}
+	#demo9 div{
+		width: 200px;
+		height: 50px;
+		border: 1px solid blue;
+	}
+	#demo10{
+		display: flex;
+	}
+	#demo10 .left{
+		flex: 1;
+		width: 200px;
+		height: 100px;
+		border: 1px solid blue;
+	}
+	#demo10 .right{
+		flex: 1;
+		width: 200px;
+		height: 100px;
+		border: 1px solid blue;
+	}
+	#demo10 .mid{
+		height: 100px;
+		width: 1000px;
+		border: 1px solid red;
+	}
+	#demo11{
+		width: 500px;
+		border: 1px solid red;
+		display: flex;
+		justify-content: space-between;
+		flex-flow: row wrap;
+		list-style: none;
+		padding: 0;
+	}
+	#demo11 .box{
+		width: 100px;
+		height: 100px;
+		border: 1px solid blue;
+		margin-bottom: 2rem;
+	}
+</style>
+<body>
+	<div id="demo1">
+		<div class="left">左栏左浮动</div>
+		<div class="right">右栏自适应</div>
+	</div>
+	<div id="demo2">
+		<div class="right">右栏右浮动</div>
+		<div class="left">左栏自适应</div>
+	</div>
+	<div id="demo3">
+		<div class="left">左栏左浮动</div>
+		<div class="right">右栏右浮动</div>
+		<div class="mid">中间自适应</div>
+	</div>
+	<div id="demo4" class="clear">
+		<div class="mid">中间先渲染,中间先渲染,中间先渲染,中间先渲染,中间先渲染,中间先渲染</div>
+		<div class="left">三个div均左浮动,我是left</div>
+		<div class="right">三个div均左浮动,我是right</div>
+	</div>
+	<div id="demo5">
+		<div class="mid">
+			<div class="inner">中间先渲染,中间先渲染,中间先渲染,中间先渲染,中间先渲染,中间先渲染</div>
+		</div>
+		<div class="left">三个div均左浮动,我是left</div>
+		<div class="right">三个div均左浮动,我是right</div>
+		<div style="clear: both;"></div>
+	</div>
+	<div id="demo6">
+		<span>我是个span元素啊，我只想垂直居中啊</span>
+	</div>
+	<div id="demo7">
+		<div>水平居中</div>
+	</div>
+	<div id="demo8">
+		<div>块级元素垂直居中</div>
+	</div>
+	<div id="demo9">
+		<div>(第二种方式)块级元素垂直居中</div>
+	</div>
+	<div id="demo10">
+		<div class="left">左</div>
+		<div class="mid">中</div>
+		<div class="right">右</div>
+	</div>
+	<ul id="demo11">
+		<li class="box"></li>
+		<li class="box"></li>
+		<li class="box"></li>
+		<li class="box"></li>
+		<li class="box"></li>
+		<li class="box"></li>
+		<li class="box"></li>
+		<li class="box"></li>
+	</ul>
+</body>
+</html>
