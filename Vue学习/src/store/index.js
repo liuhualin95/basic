@@ -59,55 +59,77 @@ const state = {
 		{content: '最新音乐'}
 	],
 	recommendLists: [
-		// {
-		// 	src: 'http://.music.163.com/discover/recommend/taste',
-		// 	num: '',
-		// 	name: '每日歌曲推荐'
-		// },
 		{
 			src: 'http://p3.music.126.net/P15ZfifMd6QEeiQRtO5R7g==/109951162928316337.jpg?param=200y200',
 			num: '82万',
-			name: '「高考季」2017一起听歌记单词吧'
+			name: '「高考季」2017一起听歌记单词吧',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		},
 		{
 			src: 'http://p4.music.126.net/E7B_FSqgugG1OEVin73fuA==/18675205000273509.jpg?param=200y200',
 			num: '113万',
-			name: '怀旧是人的本能'
+			name: '怀旧是人的本能',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		},
 		{
 			src: 'http://p3.music.126.net/JUffDhDNDpGW1e0v_Q59Dg==/1380986613435930.jpg?param=200y200',
 			num: '1221万',
-			name: '最"神级"最"耳熟"的BGM集锦'
+			name: '最"神级"最"耳熟"的BGM集锦',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		},
 		{
 			src: 'http://p3.music.126.net/1sTMKmvEcyZTsRVs3ILrKA==/18767563976189991.jpg?param=200y200',
 			num: '2487万',
-			name: '华语｜那些温暖男声听起来总让人心疼'
+			name: '华语｜那些温暖男声听起来总让人心疼',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		},
 		{
 			src: 'http://p4.music.126.net/mDiHYKDkBLzB1VqtuBYd5g==/3225967116987172.jpg?param=200y200',
 			num: '240万',
-			name: '[极速刷作业向]极品速弹弗拉门戈吉他曲'
+			name: '[极速刷作业向]极品速弹弗拉门戈吉他曲',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		},
 		{
 			src: 'http://p4.music.126.net/J0vGuBJGP9OkTlh0X0r1Ww==/18561955300840096.jpg?param=200y200',
 			num: '242万',
-			name: '无 人 之 岸 I 无 径 之 林'
+			name: '无 人 之 岸 I 无 径 之 林',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		},
 		{
 			src: 'http://p3.music.126.net/QgLjgJ-rSHyosnpwmZiYkA==/109951162932241092.jpg?param=200y200',
 			num: '93万',
-			name: '影视剧浪漫情节|遇见你是一场美丽的意外'
+			name: '影视剧浪漫情节|遇见你是一场美丽的意外',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		},
 		{
 			src: 'http://p4.music.126.net/7susvQCpxdizf6DQk9yzNQ==/109951162876279868.jpg?param=200y200',
 			num: '171万',
-			name: '『民谣情愫』旧时风物 恋恋此光阴'
+			name: '『民谣情愫』旧时风物 恋恋此光阴',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		},
 		{
 			src: 'http://p4.music.126.net/MxFTAgta9NQckTrq0u1Tjg==/18749971790280988.jpg?param=200y200',
 			num: '22万',
-			name: '【浪漫手风琴】女士，我可以请你跳支舞吗'
+			name: '【浪漫手风琴】女士，我可以请你跳支舞吗',
+			showIcon: false,
+			showHint: false,
+			hint: '测试的提示信息测试的提示信息测试的提示信息测试的提示信息测试'
 		}
 	],
 	createdSongList: [

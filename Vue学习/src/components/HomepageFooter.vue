@@ -1,42 +1,53 @@
 <template>
 	<div class="footer-container">
-		
+		<audio :src="url" autoplay controls
+		v-show="false">
+		</audio>
+		<div class="prev-icon-container">
+			<svg class="icon icon-nextvideo-copy" aria-hidden="true">
+			  <use xlink:href="#icon-nextvideo-copy"></use>
+			</svg>
+		</div>
+		<div class="play-icon-container">
+			<svg class="icon icon-ttpodicon" aria-hidden="true">
+			  <use xlink:href="#icon-ttpodicon"></use>
+			</svg>
+		</div>
+		<div class="next-icon-container">
+			<svg class="icon icon-xiayishou" aria-hidden="true">
+			  <use xlink:href="#icon-xiayishou"></use>
+			</svg>
+		</div>
+		<div class="mid-container">
+			<span>{{curTime}}</span>
+			<progress-bar
+			:width="width"
+			:val="curTimeNum"
+			:totalVal="totalTimeNum"
+			></progress-bar>
+			<span>{{totalTime}}</span>
+		</div>
 	</div>
 </template>
 
 <script>
+	import ProgressBar from './ProgressBar'
 	export default{
 		data(){
 			return {
-				placeholder: '搜索音乐，歌手，歌词，用户',
-				avatar: 'https://sfault-avatar.b0.upaiyun.com/147/223/147223148-573297d0913c5_huge256',
-				userName: '_小林',
-				showDetail: false,
-				searchText: ''
+				url: 'http://music.163.com/#/m/song?id=29823756&userid=92661811',
+				curTime: '00:00',
+				totalTime: '03:32',
+				curTimeNum: 0,
+				totalTimeNum: 212,
+				width: 62
 			}
 		},
+		components: {
+			'progress-bar': ProgressBar
+		},
 		methods: {
-			showUserDetail(){
-				this.showDetail = !this.showDetail;
-			},
-			inputFocus(){
-				this.placeholder = '';
-				document.querySelector(".icon-search").style.color = "#fff";
-			},
-			inputBlur(){
-				this.placeholder = '搜索音乐，歌手，歌词，用户';
-				let search = document.querySelector(".icon-search")
-				search.style.color = "#c87676";
-				search.onmouseover = () => {
-					search.style.color = "#fff";
-				};
-				search.onmouseout = () => {
-					search.style.color = "#c87676";
-				};
-			},
-			searchHandler(searchText){
-				//对输入内容进行处理
-			}
+			
 		}
 	}
 </script>

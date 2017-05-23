@@ -1,10 +1,18 @@
 .slider-container{
 	position: absolute;
 	top: 4rem;
-	bottom: 4.6rem;
+	bottom: 4rem;
 	// height: calc(100%-4.6rem);
 	width: 20rem;
 	background: #f5f5f7;
+	&:after{
+		visibility: hidden;
+		content: '';
+		display: block;
+		width: 0;
+		height: 0;
+		clear: both;
+	}
 	.slider-list{
 		overflow-y: auto;
 		// height: calc(100%-5rem);

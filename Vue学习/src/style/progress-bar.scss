@@ -1,0 +1,17 @@
+.progress-bar-container{
+	display: inline-block;
+	height: .5rem;
+	background-color: #e8e8e8;
+	border-radius: .5rem;
+	position: relative;
+	top: -0.12rem;
+	.progress-bar{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 10rem;
+		height: .5rem;
+		border-radius: .5rem;
+		background-color: #e83c3c;
+	}
+}

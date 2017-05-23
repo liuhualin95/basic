@@ -24,12 +24,13 @@ body{
 	.router-view {
 		position: absolute;
 		right: 0;
-		bottom: 4.6rem;
+		bottom: 4rem;
 		top: 4rem;
 	    left: 20rem;
 	    overflow-x: hidden;
 	    overflow-y: auto;
 	    background-color: #fafafa;
+	    border-left: 1px solid #e1e1e2;
 	    &::-webkit-scrollbar{
 		width: 8px;
 		}
