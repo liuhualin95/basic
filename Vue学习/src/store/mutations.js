@@ -4,5 +4,11 @@ export default {
 	},
 	addToCreatedSongList(state, newCreatedSong){
 		state.createdSongList.push(newCreatedSong);
+	},
+	play(state){
+		state.isPlaying=true
+	},
+	pause(state){
+		state.isPlaying=false
 	}
 }

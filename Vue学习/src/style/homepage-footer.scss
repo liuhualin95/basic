@@ -32,32 +32,45 @@ $button-hovercolor: rgb(211, 48, 48);
 		}
 	}
 	.prev-icon-container{
-		left: 3.3rem;
+		left: 3.8rem;
 	}
 	.play-icon-container{
-		left: 8rem;
+		left: 9rem;
 		top: 1rem;
 		width: 3rem;
 		height: 3rem;
-		.icon{
+		.icon-ttpodicon{
 			width: 1.8rem;
 			height: 1.8rem;
 			margin-right: -0.4rem;
 		}
+		.icon-zanting{
+			width: 2.8rem;
+			height: 2.8rem;
+			margin-right: 0rem;
+		}
 	}
 	.next-icon-container{
-		left: 13.3rem;	
+		left: 14.8rem;	
 	}
 	.mid-container{
-		position: absolute;
-		left: 18rem;
-		width: 80rem;
+		display: inline-block;
+		margin-left: 20rem;
+		width: 88rem;
 		height: 100%;
 		line-height: 4rem;
 		span{
 			color: rgb(136, 51, 106);
 			font-size: 1.2rem;
 			margin: 0 .8rem;
+			cursor: default;
+			user-select: none;
+		}
+		.icon-yinliang,
+		.icon-weibiaoti1{
+			vertical-align: middle;
+			margin-right: 0.5rem;
+			cursor: pointer;
 		}
 	}
 }

@@ -141,7 +141,8 @@ const state = {
 		'测试的歌单',
 		'欢快的歌单',
 		'测试的歌单'
-	]
+	],
+	isPlaying: false
 }
 
 export default new Vuex.Store({
