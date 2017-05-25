@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vuex</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<div id="app">
+		<p>{{count}}</p>
+		<button @click="increment">+</button>
+		<button @click="decrement">-</button>
+	</div>
+</body>
+<script src="./vue.js"></script>
+<script src="./vuex.js"></script>
+<script type="text/javascript">
+	const store = new Vuex.Store({
+		state: {
+			count: 0
+		},
+		mutations: {
+			increment(state){
+				state.count++;
+			},
+			decrement: (state) => state.count--
+		}
+	})
+	//通过提交mutation的方式，更明确地追踪到状态的变化
+	//实现一些能记录每次状态改变，保存状态快照的调试工具
+	var vm = new Vue({
+		el: '#app',
+		computed: {
+			count(){
+				return store.state.count;
+			}
+		},
+		methods: {
+			increment: () => store.commit('increment'),
+			decrement(){
+				store.commit('decrement');
+			}
+		}
+	})
+	
+</script>
+</html>

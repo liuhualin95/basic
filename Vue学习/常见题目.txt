@@ -1,0 +1,39 @@
+﻿1、css引入方式有哪些
+1）link
+2）import
+3）内联样式
+4）写在body前的style标签里面
+2、link和import差别
+1）link无兼容性，import须ie5以上
+2）link支持使用js操作dom改变样式，import不可以
+3）link是xml标签还可以定义rel连接属性等，import是css提供的一种方式，只能用于加载css
+4）link标签引入的css和页面同时加载，import将在页面下载完之后加载css
+3、行内元素：span a img input select
+块级元素： div p h1-h5 ul li
+4、XML和HTML区别：
+XML标签必须正确被嵌套，闭合，小写，有根元素
+5、Doctype、严格模式与混杂模式
+Doctype存在于文档第一行，告诉浏览器以何种标准解析文档
+严格模式是指使用浏览器可支持的最高标准去解析文档
+混杂模式是一种比较宽松的向后兼容的模式，兼容老式站点以防止其无法工作
+Doctype书写不正确或不存在会导致页面以混杂模式出现
+6、IE6 bug以及解决
+1）float浮动引起的双边距问题，3像素问题 加_display: inline -3px
+2）png24位的图片在ie6上有背景 换成png8
+3）浏览器默认margin和padding不同 可以加一个*{margin: 0; padding: 0}
+4）超链接访问顺序 LVHA (link visited hover active)
+5）z-index问题 给父级添加position:relative
+6）为什么没有办法定义1px左右的宽度容器
+ie6默认行高造成的 使用overflow：hidden zoom：0.08 line-height：1px
+7、常用css hack技巧
+bgd: red\9  ie678识别
+*bgd: blue  ie67识别
+_bgd: white ie6识别
+8、ie和dom事件流的区别：
+1）ie事件流只支持冒泡，dom事件流先捕获后冒泡且文本节点会触发事件（IE不会）
+2）参数不同：attachEvent()两个参数 addEventListener()三个参数
+3）加不加on：attachEvent()第一个参数比addEventListener()第一个参数多个on
+4）this指向不同，ie事件流是全局作用域指向window，dom事件流是元素作用域，指向元素
+5）ie阻止冒泡window.event.cancelBubble=false    dom阻止冒泡e.stopPropogation()
+   ie阻止默认事件window.event.returnValue=false dom阻止默认事件e.preventDefault()
+   ie事件目标window.event.srcElement            dom事件目标e.target
