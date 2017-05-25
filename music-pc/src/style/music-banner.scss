@@ -1,0 +1,122 @@
+.banner-container{
+	width: 80rem;
+	height: 25rem;
+	position: relative;
+	margin: 2rem auto 0;
+	.img-container{
+		position: relative;
+		height: 20rem;
+		cursor: pointer;
+		ul{
+			list-style: none;
+			li{
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				transform: translate(-50%);
+				transition: all .5s;
+				width: 40rem;
+				height: 100%;
+				img{
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+		.left{
+			transform: translate(-110%, 5%) scale(.9, .9);
+			z-index: 2;
+			&:before{
+				position: absolute;
+				content: '';
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, .5);
+			}
+			&.is-prev{
+				z-index: 1;
+			}
+		}
+		.center{
+			position: absolute;
+			width: 40rem;
+			left: 50%;
+			height: 100%;
+			transform: translate(-50%) scale(1, 1);
+			z-index: 3;
+		}
+		.right{
+			transform: translate(10%, 5%) scale(.9, .9);
+			z-index: 1;
+			&:before{
+				position: absolute;
+				content: '';
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, .5);
+			}
+			&.is-prev{
+				z-index: 2;
+			}
+		}
+		.skip-left{
+			transition: none;
+			transform: translate(-80%, 5%) scale(.7, .7);
+		}
+		.skip-center{
+			transition: none;
+			transform: translate(-50%) scale(.8, .8);
+		}
+		.skip-right{
+			transition: none;
+			transform: translate(-20%, 5%) scale(.7, .7);
+		}
+	}
+	.box-list{
+		position: absolute;
+		padding-left: 0;
+		left: 0;
+		bottom: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		list-style: none;
+		width: 100%;
+		height: 8%;
+		.box{
+			width: 1.8rem;
+			height: 3px;
+			background: #c4c4c4;
+			margin: 0 .25rem;
+			cursor: pointer;
+		}
+		.active{
+			background-color: #c62f2f;
+		}
+	}
+}
+@media screen and (min-width: 1450px){
+	.banner-container{
+		width: 100rem;
+		.img-container{
+			height: 90%;
+			ul{
+				li{
+					width: 50rem;
+					height: 100%;
+				}
+			}
+			.center{
+				width: 50rem;
+				height: 100%;
+			}
+		}
+		.box-list{
+			bottom: 0;
+		}
+	}
+}

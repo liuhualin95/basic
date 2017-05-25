@@ -1,0 +1,43 @@
+.find-music-container{
+	padding: 0 3rem;
+	.find-music-header{
+		width: 84rem;
+		height: 3.5rem;
+		border-bottom: 1px solid rgb(225, 225, 226);
+		margin: 0 auto;
+		ul{
+			list-style: none;
+			width: 45rem;
+			height: 100%;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+			li{
+				display: inline-block;
+				text-align: center;
+				width: 5rem;
+				height: 3.4rem;
+				line-height: 3.5rem;
+				cursor: pointer;
+				color: rgb(51, 51, 51);
+				&:hover{
+					color: rgb(198, 47, 47);
+				}
+				&.active{
+					color: rgb(198, 47, 47);
+					border-bottom: 2px solid rgb(198, 47, 47);
+				}
+			}
+		}
+	}
+}
+@media screen and (min-width: 1450px){
+	.find-music-container{
+		.find-music-header{
+			width: 105rem;
+			ul{
+				width: 60rem;
+			}
+		}
+	}
+}

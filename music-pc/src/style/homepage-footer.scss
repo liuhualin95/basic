@@ -1,0 +1,215 @@
+$color-border: rgb(225, 225, 226);
+$button-bgdcolor: rgb(232, 60, 60);
+$button-hovercolor: rgb(211, 48, 48);
+.footer-container{
+	position: absolute;
+	z-index: 6;
+	width: 100%;
+	height: 4rem;
+	bottom: 0;
+	background: rgb(246, 246, 248);
+	border-top: 1px solid $color-border;
+	.prev-icon-container,
+	.play-icon-container,
+	.next-icon-container{
+		position: absolute;
+		border-radius: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transform: translate(-0.5rem, -0.5rem);
+		background: $button-bgdcolor;
+		cursor: pointer;
+		top: 1.25rem;
+		width: 2.5rem;
+		height: 2.5rem;
+		.icon{
+			color: #fff;
+			width: 1.2rem;
+			height: 1.2rem;
+		}
+		&:hover{
+			background: $button-hovercolor;
+		}
+	}
+	.prev-icon-container{
+		left: 3.8rem;
+	}
+	.play-icon-container{
+		left: 9rem;
+		top: 1rem;
+		width: 3rem;
+		height: 3rem;
+		.icon-ttpodicon{
+			width: 1.8rem;
+			height: 1.8rem;
+			margin-right: -0.4rem;
+		}
+		.icon-zanting{
+			width: 2.8rem;
+			height: 2.8rem;
+			margin-right: 0rem;
+		}
+	}
+	.next-icon-container{
+		left: 14.8rem;	
+	}
+	.mid-container{
+		display: inline-block;
+		margin-left: 20.6rem;
+		width: 93rem;
+		height: 100%;
+		line-height: 4rem;
+		>span{
+			color: rgb(86, 86, 86);
+			font-size: 1.2rem;
+			margin: 0 .8rem;
+			cursor: default;
+			user-select: none;
+		}
+		.icon{
+			vertical-align: middle;
+			margin-right: 0.5rem;
+			cursor: pointer;
+			&.icon-ttpodicon1,
+			&.icon-danquxunhuan,
+			&.icon-suijibofang,
+			&.icon-shunxubofang{
+				margin: 0 1.5rem;
+			}
+			&.icon-ttpodicon2{
+				margin: 0 0 0 3rem;
+				position: absolute;
+				top: 1.4rem;
+				right: 5.7rem;
+			}
+		}
+		.word{
+			width: 1.5rem;
+			height: 1.5rem;
+			display: inline-block;
+			border: 1px solid rgb(145, 145, 145);
+			position: absolute;
+			top: 1.25rem;
+			right: 8.5rem;
+			cursor: pointer;
+			>span{
+				position: absolute;
+				color: rgb(102, 102, 102);
+				font-size: 1.2rem;
+				top: -1.25rem;
+				left: .3rem;
+			}
+			&:hover{
+				border: 1px solid rgb(68, 68, 68);
+				>span{
+					color: rgb(68, 68, 68);
+				}
+			}
+			&.active{
+				background: rgb(68, 68, 68);
+				>span{
+					color: #fff;
+				}
+				&:hover{
+					border: 1px solid rgb(68, 68, 68);
+					background: rgb(246, 246, 248);
+					>span{
+						color: rgb(68, 68, 68);
+					}
+				}
+			}
+		}
+		.music-list-num{
+			position: absolute;
+			top: 1.15rem;
+			right: 1.6rem;
+			width: 4rem;
+			height: 1.8rem;
+			background: #e1e1e2;
+			border-top-right-radius: 10px;
+			border-bottom-right-radius: 10px;
+			text-align: center;
+			line-height: 1.8rem;
+			cursor: pointer;
+			>span{
+				color: #686868;
+			}
+		}
+	}
+	.song-list-container{
+		position: absolute;
+		right: 0;
+		bottom: 4.1rem;
+		width: 45rem;
+		height: 38rem;
+		background: rgb(250, 250, 250);
+		z-index: 5;
+		border-top: 1px solid rgb(196, 196, 196);
+		border-left: 1px solid rgb(196, 196, 196);
+		box-shadow: -0.5px -0.5px 3px rgb(190, 190, 190);
+		.list-header{
+			width: 100%;
+			height: 3.8rem;
+			border-bottom: 1px solid $color-border;
+			line-height: 3.8rem;
+			text-align: center;
+			>span{
+				display: inline-block;
+				cursor: pointer;
+				width: 9rem;
+				height: 2.2rem;
+				line-height: 2.2rem;
+				background: rgb(124, 125, 133);
+				color: #fff;
+				border-radius: 4px;
+				font-size: 1.2rem;
+			}
+		}
+		.list-num{
+			width: 100%;
+			height: 2.5rem;
+			border-bottom: 1px solid rgb(229, 229, 229);
+			line-height: 2.5rem;
+			background: rgb(249, 249, 249);
+			overflow-y: auto;
+			>span{
+				color: rgb(102, 102, 102);
+				margin-left: 3rem;
+			}
+		}
+		ul{
+			width: 100%;
+			list-style: none;
+			li{
+				width: 100%;
+				height: 2.5rem;
+				line-height: 2.5rem;
+				cursor: default;
+				background: rgb(250, 250, 250);
+				&:nth-of-type(2n){
+					background: rgb(245, 245, 247);
+				}
+				&:hover{
+					background: rgb(235, 236, 237);
+				}
+				span{
+					color: rgb(51, 51, 51);
+					font-size: 1.2rem;
+					display: inline-block;
+					&:first-child{
+						margin-left: 3rem;
+						width: 30rem;
+					}
+				}
+			}
+		}
+	}
+}
+@media screen and (min-width: 1450px){
+	.footer-container{
+		.mid-container{
+			width: 125rem;
+		}
+	}
+}

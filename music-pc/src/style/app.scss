@@ -1,0 +1,45 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	height: 100%;
+	font-size: 62.5%;
+}
+body{
+	height: 100%;
+	font-size: 1.4rem;
+	overflow: hidden;
+}
+.icon {
+   width: 16px; height: 16px;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+}
+#app{
+	height: 100%;
+	overflow: auto;
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	.router-view {
+		position: absolute;
+		right: 0;
+		bottom: 4rem;
+		top: 4rem;
+	    left: 20rem;
+	    overflow-x: hidden;
+	    overflow-y: auto;
+	    background-color: #fafafa;
+	    border-left: 1px solid #e1e1e2;
+	    &::-webkit-scrollbar{
+		width: 8px;
+		}
+		&::-webkit-scrollbar-thumb {
+	      border-radius: 8px;
+	      background-color: #e1e1e2;
+	      &:hover {
+	        background-color: #cfcfd1;
+	      }
+	    }
+	}
+}
