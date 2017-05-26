@@ -1,6 +1,7 @@
 ﻿# music-pc
 
 > a music-pc project by vue
+> 可以下载loadme文件打开index.html查看demo
 
 ## Build Setup
 
