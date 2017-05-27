@@ -1,9 +1,12 @@
 export default {
+	initComments(state, payload){
+		state.playSongList[state.nowPlayIndex].comments = payload
+	},
 	addComment(state, comment){
-		state.playSongList[state.nowPlayIndex].comments.push(comment);
+		state.playSongList[state.nowPlayIndex].comments.unshift(comment)
 	},
 	addToCreatedSongList(state, newCreatedSong){
-		state.createdSongList.push(newCreatedSong);
+		state.createdSongList.push(newCreatedSong)
 	},
 	play(state){
 		state.isPlaying = true

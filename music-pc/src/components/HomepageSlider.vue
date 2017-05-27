@@ -3,7 +3,8 @@
 		<div class="slider-list">
 			<div>推荐</div>
 			<ul class="recommend">
-				<li :class="{active: recommendLis[0].isActive}">
+				<li :class="{active: recommendLis[0].isActive}"
+				@click="$router.push({name: 'FindMusic'})">
 					<svg class="icon icon-yinle" aria-hidden="true">
 					  <use xlink:href="#icon-yinle"></use>
 					</svg>
@@ -78,8 +79,7 @@
 			</div>
 			<ul v-if="showSongList">
 				<li>
-					<svg class="icon icon-xihuan" aria-hidden="true"
-						style="margin-top: 0.1rem;">
+					<svg class="icon icon-xihuan" aria-hidden="true">
 					  <use xlink:href="#icon-xihuan"></use>
 					</svg>
 					<span>我喜欢的音乐</span>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import mutations from './mutations'
 import actions from './actions'
+import Mock from 'mockjs'
 
 Vue.use(Vuex);
 
@@ -11,7 +12,8 @@ const state = {
 	collectedSongList: [
 		'收藏的歌单'
 	],
-	nowPlayIndex: 0,
+	limit: 5,
+	nowPlayIndex: 1,
 	playSongList: [
 		{
 			name: '我的一个道姑朋友',
@@ -72,20 +74,29 @@ const state = {
 				'我爱你三个字',
 				'命中注定一辈子'
 			],
-			comments: [
-				{
-					avatar: 'https://sfault-avatar.b0.upaiyun.com/147/223/147223148-573297d0913c5_huge256',
-					name: '善美的敬敬',
-					content: '当你感觉对方不爱你的时候，千万要相信你的感觉，别去为自欺欺人找借口。对方若不爱你，不会因为你的执着而被打动，你的深情也将使他避之唯恐不及。偶尔给的温柔，是毒药。你本可以理直气壮地爱人及被爱，何必卑微屈从于假象。爱自己比什么都重要，傻过几次就够了，别再给对方反复伤害你的机会。',
-					time: '2015年6月25日 16:52'
-				},
-				{
-					avatar: 'https://sfault-avatar.b0.upaiyun.com/147/223/147223148-573297d0913c5_huge256',
-					name: '帐号已注销',
-					content: '他只是看了你一眼，你却在心里写了本小说。',
-					time: '2016年2月9日 15:36'
-				}
-			]
+			// comments: [
+			// 	{
+			// 		avatar: 'https://sfault-avatar.b0.upaiyun.com/147/223/147223148-573297d0913c5_huge256',
+			// 		name: '善美的敬敬',
+			// 		content: '当你感觉对方不爱你的时候，千万要相信你的感觉，别去为自欺欺人找借口。对方若不爱你，不会因为你的执着而被打动，你的深情也将使他避之唯恐不及。偶尔给的温柔，是毒药。你本可以理直气壮地爱人及被爱，何必卑微屈从于假象。爱自己比什么都重要，傻过几次就够了，别再给对方反复伤害你的机会。',
+			// 		time: '2015年6月25日 16:52'
+			// 	},
+			// 	{
+			// 		avatar: 'https://sfault-avatar.b0.upaiyun.com/147/223/147223148-573297d0913c5_huge256',
+			// 		name: '帐号已注销',
+			// 		content: '他只是看了你一眼，你却在心里写了本小说。',
+			// 		time: '2016年2月9日 15:36'
+			// 	}
+			// ]
+			comments: []
+			// ...Mock.mock({
+			// 	'comments|15': [{
+			//     	'avatar' : '@image("250x250", "@color", "@word")',
+			//         'name'   : '@cname',
+			//         'content': '@cparagraph',
+			//         'time'   : '@datetime("yyyy年MM月dd日 HH:mm")'
+			//     }]
+			// })
 		}
 	],
 	itemLists: [
@@ -183,8 +194,15 @@ const state = {
 	isPlaying: false
 }
 
+const getters = {
+	pageNo(state){
+		return Math.ceil(state.playSongList[state.nowPlayIndex].comments.length/state.limit)
+	}
+}
+
 export default new Vuex.Store({
 	state,
+	getters,
 	mutations,
 	actions
 })

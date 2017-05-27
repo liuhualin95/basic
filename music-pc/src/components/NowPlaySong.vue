@@ -54,14 +54,15 @@
 			<div class="comment-input">
 				<input type="text" v-model="newComment"
 				placeholder="发表评论" 
-				@keyup.enter="addComment">
+				@keyup.enter="addComment"
+				ref="addComment">
 			</div>
 		</div>
 		<div class="wonderful-comment">
-			<span>精彩评论</span>
-			<ul>
-				<li v-for="item in nowPlaySong.comments">
-					<img :src="avatar">
+			<span>最新评论</span>
+			<ul v-if="comments.length">
+				<li v-for="item in commentList">
+					<img :src="item.avatar">
 					<div class="comment-content">
 						<span>{{item.name}}:</span>
 						<span>{{item.content}}</span>
@@ -69,25 +70,56 @@
 					</div>
 				</li>
 			</ul>
+			<pagination :pageNo="pageNo" :current="currentPage"
+			@goPage="goPage"></pagination>
+			<div class="no-comment" v-if="comments.length === 0">
+				<span>暂无评论，快来第一个
+					<a @click="$refs.addComment.focus()">评论</a>吧
+				</span>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 	import {mapState} from 'vuex'
+	import {mapGetters} from 'vuex'
+	import Pagination from './Pagination'
+	import axios from 'axios'
+	import '../mock/comments.js'
 
 	export default {
 		data(){
 			return {
-				newComment: ''
+				newComment: '',
+				currentPage: 1,
+				commentList: []
 			}
 		},
-		computed: mapState({
-			nowPlayIndex: state => state.nowPlayIndex,
-			nowPlaySong: state => state.playSongList[state.nowPlayIndex],
-			avatar: state => state.avatar,
-			userName: state => state.userName
-		}),
+		mounted(){
+			axios.get('http://playsong.comments.com')
+			.then( res => {
+				this.$store.commit('initComments', res.data.comments)
+				this.commentList = this.comments.slice(this.limit*(this.currentPage-1), this.limit*this.currentPage)
+			})
+		},
+		computed: {
+			...mapState({
+				nowPlayIndex: state => state.nowPlayIndex,
+				nowPlaySong: state => state.playSongList[state.nowPlayIndex],
+				avatar: state => state.avatar,
+				userName: state => state.userName,
+				comments: state => state.playSongList[state.nowPlayIndex].comments,
+				limit: state => state.limit,
+				pageNo: state => state.pageNo
+			}),
+			...mapGetters({
+				pageNo: 'pageNo'
+			})
+		},
+		components: {
+			'pagination': Pagination
+		},
 		methods: {
 			addComment(){
 				let today = new Date(),
@@ -103,6 +135,17 @@
 				};
 				this.$store.dispatch('addComment', comment);
 				this.newComment = '';
+			},
+			goPage(index){
+				this.currentPage = index
+			}
+		},
+		watch: {
+			currentPage(val){
+				this.commentList = this.comments.slice(this.limit*(val-1), this.limit*val)
+			},
+			comments(val){
+				this.commentList = this.comments.slice(this.limit*(this.currentPage-1), this.limit*this.currentPage)
 			}
 		}
 	}

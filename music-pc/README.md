@@ -1,6 +1,6 @@
 ﻿# music-pc
 
-> a music-pc project by vue
+> a music-pc project by vue<br>
 > 可以下载loadme文件打开index.html查看demo
 
 ## Build Setup
@@ -23,16 +23,18 @@ npm run build --report
 > npm install --save vue-resource
 > npm install --save vue-router
 > npm install axios --save
-> 第一步，
+> npm install mockjs
+
+> sass安装第一步，
 > npm install node-sass --save-dev
 > npm install sass-loader --save-dev
-> 第二步，打开webpack.base.config.js在loaders里面加上
+> 第二步，打开webpack.base.config.js在loaders里面加上(似乎现在不需要了)
 >     {
 >       test: /\.scss$/,
 >       loaders: ["style", "css", "sass"]
 >     }   
 > 第三步，在需要用到scss的地方写上
-> 	<style lang="scss" scoped>
+> 	<style scoped lang='scss'>
 > 	</style>
 ```
 

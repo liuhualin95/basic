@@ -111,6 +111,9 @@
 <script>
 	import ProgressBar from './ProgressBar'
 	import {mapState} from 'vuex'
+	import axios from 'axios'
+	import '../mock/comments.js'
+
 	export default{
 		data(){
 			return {
@@ -136,7 +139,8 @@
 				nowPlayIndex: state => state.nowPlayIndex,
 				playSongNum: state => state.playSongList.length,
 				playSongList: state => state.playSongList,
-				url: state => state.playSongList[state.nowPlayIndex].url
+				url: state => state.playSongList[state.nowPlayIndex].url,
+				comments: state => state.playSongList[state.nowPlayIndex].comments
 			})
 		},
 		components: {
@@ -239,6 +243,16 @@
 				this.nowPlayIndex === 0 ?
 				this.$store.commit('setPlayIndex', this.playSongNum - 1) :
 				this.$store.commit('setPlayIndex', --this.nowPlayIndex)
+			}
+		},
+		watch: {
+			nowPlayIndex(){
+				if(!this.comments.length){
+					axios.get('http://playsong.comments.com')
+					.then( res => {
+						this.$store.commit('initComments', res.data.comments)
+					})
+				}
 			}
 		}
 	}
