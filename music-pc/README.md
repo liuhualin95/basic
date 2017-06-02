@@ -38,7 +38,7 @@ npm run build --report
 > 	</style>
 ```
 ## 轮播
-![轮播](https://github.com/liuhualin95/basic/tree/master/music-pc/raw/master/pic/carousel.png)
+![轮播](https://github.com/liuhualin95/basic/music-pc/pic/carousel.png)
 ``` bash
 轮播图实现思路：
 1、写一个ul里面三个li放图（第七张第一张第二张），同时用transform写好位置li上添加transition有个动态效果
