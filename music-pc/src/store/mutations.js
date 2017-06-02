@@ -1,6 +1,7 @@
 export default {
 	initComments(state, payload){
-		state.playSongList[state.nowPlayIndex].comments = payload
+		if(!state.playSongList[state.nowPlayIndex].comments.length)
+			state.playSongList[state.nowPlayIndex].comments = payload
 	},
 	addComment(state, comment){
 		state.playSongList[state.nowPlayIndex].comments.unshift(comment)

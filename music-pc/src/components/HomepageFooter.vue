@@ -29,16 +29,16 @@
 			</svg>
 		</div>
 		<div class="mid-container">
-			<span>{{curTime}}</span>
-			<progress-bar
+			<span>{{curTime}}</span
+			><progress-bar
 			:width="width"
 			:val="curTimeNum"
 			:total-val="totalTimeNum"
 			bar-type="music"
 			@move="move"
 			@skip="skip"
-			></progress-bar>
-			<span>{{totalTime}}</span>
+			></progress-bar
+			><span>{{totalTime}}</span>
 			<svg class="icon icon-yinliang" aria-hidden="true"
 			@click="switchVolume"
 			v-if="hasVolume">
