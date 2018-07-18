@@ -66,4 +66,3 @@
 	1）defer 仅IE能用
 	2）async
 	3）创建script元素添加到DOM
-test
